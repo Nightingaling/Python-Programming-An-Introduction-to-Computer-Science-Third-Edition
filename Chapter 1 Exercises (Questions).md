@@ -1,19 +1,22 @@
 # Chapter 1: Computers and Programs
 
+</br>
+
 ## Review Questions
 True/False
 
-1. Computer science is the study of computers.
-2. The CPU is the "brain" of the computer.
-3. Secondary memory is also called RAM.
-4. All information that a computer is currently working on is stored in main memory.
-5. The syntax of a language is its meaning, and semantics is its form.
-6. A function definition is a sequence of statements that defines a new command.
-7. A programming environment refers to a place where programmers work.
-8. A variable is used to give a name to a value so it can be referred to in other places.
-9. A loop is used to skip over a section of a program.
-10. A chaotic function can't be computed by a computer
+    1. Computer science is the study of computers.
+    2. The CPU is the "brain" of the computer.
+    3. Secondary memory is also called RAM.
+    4. All information that a computer is currently working on is stored in main memory.
+    5. The syntax of a language is its meaning, and semantics is its form.
+    6. A function definition is a sequence of statements that defines a new command.
+    7. A programming environment refers to a place where programmers work.
+    8. A variable is used to give a name to a value so it can be referred to in other places.
+    9. A loop is used to skip over a section of a program.
+    10. A chaotic function can't be computed by a computer
 
+</br>
 
 ## Multiple Choice
 ### 1. What is the fundamental question of computer science?
@@ -67,6 +70,7 @@ True/False
     c) arguments
     d) both b) and c) are correct
 
+</br>
 
 ## Discussion
 ### 1. Compare and contrast the following pairs of concepts from the chapter:
@@ -102,6 +106,8 @@ True/False
         X = 3. 9 * x * (1 - x)
         print(x)
     main()
+
+</br>
 
 ## Programming Exercises
 ### 1. Start up an interactive Python session and try typing in each of the following commands. Write down the results you see.
@@ -157,4 +163,4 @@ True/False
 
 <br/>
 
-### 7. (Advanced) Modify the chaos program so that it accepts two inputs and then prints a table with two columns similar to the one shown in Section 1.8. (Note: You will probably not be able to get the columns to line up as nicely as those in the example. Chapter 5 discusses how to print numbers with a fixed number of decimal places.) 
+### 7. (Advanced) Modify the chaos program so that it accepts two inputs and then prints a table with two columns similar to the one shown in Section 1.8. (Note: You will probably not be able to get the columns to line up as nicely as those in the example. Chapter 5 discusses how to print numbers with a fixed number of decimal places.)
