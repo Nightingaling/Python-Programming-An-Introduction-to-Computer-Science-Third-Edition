@@ -11,7 +11,7 @@ End Date: IN PROGRESS
 
 # Table of Content & Exercises
 - [X] Computers and Programs
-- [ ] Writing Simple Programs
+- [X] Writing Simple Programs
 - [ ] Computing with Numbers
 - [ ] Objects and Graphics
 - [ ] Sequences: Strings, Lists, and Files
