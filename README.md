@@ -10,7 +10,7 @@ Start Date: June 1, 2024
 End Date: IN PROGRESS
 
 # Table of Content & Exercises
-- [ ] Computers and Programs
+- [X] Computers and Programs
 - [ ] Writing Simple Programs
 - [ ] Computing with Numbers
 - [ ] Objects and Graphics
