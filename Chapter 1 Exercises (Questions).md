@@ -99,10 +99,10 @@ True/False
 ### 5. Trace through the chaos program from Section 1.6 by hand using 0.15 as the input value. Show the sequence of output that results. 
     # File: chaos. py
     # A simple program illustrating chaotic behavior.
-    def main() :
+    def main():
       print("This program illustrates a chaotic function")
-      x = eval(input("Enter a number between 0 and 1: ") )
-      for i in range(10) :
+      x = eval(input("Enter a number between 0 and 1: "))
+      for i in range(10):
         x = 3.9 * x * (1 - x)
         print(x)
     main()
@@ -111,12 +111,12 @@ True/False
 
 ## Programming Exercises
 ### 1. Start up an interactive Python session and try typing in each of the following commands. Write down the results you see.
-    a) print("Hello, world! ")
+    a) print("Hello, world!")
     b) print("Hello", "world!")
     c) print(3)
     d) print(3.0)
     e) print(2 + 3)
-    f) print(2. 0 + 3. 0)
+    f) print(2.0 + 3.0)
     g) print("2" + "3")
     h) print("2 + 3 =", 2 + 3)
     i) print(2 * 3)
@@ -141,7 +141,7 @@ True/False
 </br>
 
 ### 5. Modify the chaos program so that the number of values to print is determined by the user. You will have to add a line near the top of the program to get another value from the user:
-    n = eval(input("How many numbers should I print? ") )
+    n = eval(input("How many numbers should I print? "))
 > Remember to change the loop to use n instead of a specific number.
 
 <br/>
