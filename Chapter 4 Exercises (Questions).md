@@ -38,7 +38,7 @@ True/False
     a) Line(2,3,4,5)
     b) Line((2,3), (4,5))
     c) Line(2,4,3,5)
-    d) Line(Point(2,3), Point (4,5))
+    d) Line(Point(2,3), Point(4,5))
     
 ### 6. What command would be used to draw the graphics object shape into the graphics window win?
     a) win.draw(shape) b) win.show(shape)
@@ -68,16 +68,16 @@ True/False
 
 ### 2. Describe in your own words the object produced by each of the following operations from the graphics module. Be as precise as you can. Be sure to mention such things as the size, position, and appearance of the various objects. You may include a sketch if that helps.
     a) Point(130,130)
-    b) c = Circle(Point(30,40),25)
+    b) c = Circle(Point(30,40), 25)
        c.setFill("blue")
        c.setOutline("red")
     c) r = Rectangle(Point(20,20), Point(40,40))
        r.setFill(color_rgb(0,255,150))
        r.setWidth(3)
-    d) 1 = Line(Point(100,100),Point(100,200))
+    d) 1 = Line(Point(100,100), Point(100,200))
        l.set0utline("red4")
        l.setArrow("first")
-    e) Oval(Point(50,50),Point(60,100))
+    e) Oval(Point(50,50), Point(60,100))
     f) shape = Polygon(Point(5,5), Point(10,10), Point(5,10), Point(10,5))
        shape.setFill("orange")
     g) t = Text(Point(100,100), "Hello World!")
@@ -131,53 +131,49 @@ True/False
 </br>
 
 ### 6. Modify the graphical future value program so that the input (principal and APR) also are done in a graphical fashion using Entry objects.
-    # futval_graph . py
+    # futval_graph2.py
     from graphics import *
     def main():
-      # Introduction
-      print("This program plots the growth of a 10-year investment.")
-      
-      # Get principal and interest rate
-      principal = float(input("Enter the initial principal: "))
-      apr = float(input("Enter the annualized interest rate: "))
-      
-      # Create a graphics window with labels on left edge
-      win = GraphWin("Investment Growth Chart", 320, 240)
-      win.setBackground("white")
-      Text(Point(20, 230), '0.0K').draw(win)
-      Text(Point(20, 180), '2.5K').draw(win)
-      Text(Point(20, 130), '5.0K').draw(win)
-      Text(Point(20, 80), '7.5K').draw(win)
-      Text(Point(20, 30), '10.0K').draw(win)
-      
-      # Draw bar for initial principal
-      height = principal * 0.02
-      bar = Rectangle(Point(40, 230), Point(65, 230-height))
-      bar.setFill("green")
-      bar.setWidth(2)
-      bar.draw(win)
-      
-      # Draw bars for successive years
-      for year in range(1,11):
-        # calculate value for the next year
-        principal = principal * (1 + apr)
-        # draw bar for this value
-        xll = year * 25 + 40
-        height = principal * 0.02
-        bar = Rectangle(Point(xll, 230), Point(xll+25, 230-height))
+        # Introduction
+        print("This program plots the growth of a 10-year investment.")
+        
+        # Get principal and interest rate
+        principal = float(input("Enter the initial principal: "))
+        apr = float(input("Enter the annualized interest rate: "))
+
+        # Create a graphics window with labels on left edge
+        win = GraphWin("Investment Growth Chart", 320, 240)
+        win.setBackground( "white ")
+        win.setCoords(-1.75, -200, 11.5, 10400)
+        Text(Point(-1, 0), ' 0.0K').draw(win)
+        Text(Point(-1, 2500), ' 2.5K').draw(win)
+        Text(Point(-1, 5000), ' 5.0K').draw(win)
+        Text(Point(-1, 7500), ' 7.5k').draw(win)
+        Text(Point(-1, 10000), '10.0K').draw(win)
+
+        # Draw bar for initial principal
+        bar = Rectangle(Point(0,0), Point(1, principal))
         bar.setFill("green")
         bar.setWidth(2)
         bar.draw(win)
-        
-      input("Press <Enter> to quit")
-      win.close()
+
+        # Draw a bar for each subsequent year
+        for year in range(1, 11):
+            principal = principal * (1 + apr)
+            bar = Rectangle(Point(year, 0), Point(year+1, principal))
+            bar.setFill("green")
+            bar.setWidth(2)
+            bar.draw(win)
+            
+        input("Press <Enter> to quit")
+        win.close()
     main()
     
 </br>
 
 ### 7. Circle Intersection.
     Write a program that computes the intersection of a circle with a horizontal line and displays the information textually and graphically.
-    Input: Radius of the circle and they-intercept of the line.
+    Input: Radius of the circle and the y-intercept of the line.
     Output: Draw a circle centered at (0, 0) with the given radius in a window
             with coordinates running from -10,-10 to 10,10.
             Draw a horizontal line across the window with the given y-intercept.
