@@ -25,7 +25,7 @@ True/False
     
 ### 2. What is the correct formula for converting Celsius to Fahrenheit?
     a) F = 9/5(C) + 32 b) F = 5/9(C)- 32
-    c) F = B^2 - 4AC d) F = 212-32 / 100-0
+    c) F = B² - 4AC d) F = 212-32 / 100-0
     
 ### 3. The process of describing exactly what a computer program will do to solve a problem is called
     a) design b) implementation c) programming d) specification
@@ -98,9 +98,7 @@ True/False
         print ("Hello")
     print ("end")
     
-Look at the flowchart for the for statement in this chapter to help you
-figure this out. Then test your prediction by trying out these lines in a
-program.
+> Look at the flowchart for the for statement in this chapter to help you figure this out. Then test your prediction by trying out these lines in a program.
 
 </br>
 
