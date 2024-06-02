@@ -103,7 +103,7 @@ True/False
       print("This program illustrates a chaotic function")
       x = eval(input("Enter a number between 0 and 1: ") )
       for i in range(10) :
-        X = 3. 9 * x * (1 - x)
+        X = 3.9 * x * (1 - x)
         print(x)
     main()
 
@@ -133,14 +133,14 @@ True/False
       print("This program illustrates a chaotic function")
       x = eval(input("Enter a number between 0 and 1: ") )
       for i in range(10) :
-        X = 3. 9 * x * (1 - x)
+        X = 3.9 * x * (1 - x)
         print(x)
     main()
     
 </br>
 
 ### 3. Modify the chaos program using 2.0 in place of 3.9 as the multiplier in the logistic function. Your modified line of code should look like this:
-    X = 2. 0 * x * (1 - x) 
+    X = 2.0 * x * (1 - x) 
 ### Run the program for various input values and compare the results to those obtained from the original program. Write a short paragraph describing any differences that you notice in the behavior of the two versions.
 
 <br/>
