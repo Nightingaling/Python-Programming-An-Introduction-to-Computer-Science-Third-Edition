@@ -142,7 +142,7 @@ True/False
 
 ### 5. Modify the chaos program so that the number of values to print is determined by the user. You will have to add a line near the top of the program to get another value from the user:
     n = eval(input("How many numbers should I print? ") )
-### Then you will need to change the loop to use n instead of a specific number.
+> Remember to change the loop to use n instead of a specific number.
 
 <br/>
 
