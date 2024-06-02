@@ -127,16 +127,7 @@ True/False
 </br>
 
 ### 2. Enter and run the chaos program from Section 1.6. Try it out with various values of input to see that it functions as described in the chapter.
-    # File: chaos. py
-    # A simple program illustrating chaotic behavior.
-    def main() :
-      print("This program illustrates a chaotic function")
-      x = eval(input("Enter a number between 0 and 1: ") )
-      for i in range(10) :
-        x = 3.9 * x * (1 - x)
-        print(x)
-    main()
-    
+
 </br>
 
 ### 3. Modify the chaos program using 2.0 in place of 3.9 as the multiplier in the logistic function. Your modified line of code should look like this:
