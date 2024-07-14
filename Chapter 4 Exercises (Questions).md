@@ -18,7 +18,7 @@ True/False
 
 </br>
 
-## Mutiple Choice
+## Multiple Choice
 ### 1. A method that returns the value of an object's instance variable is called a(n)
     a) mutator b) function c) constructor d) accessor
     
