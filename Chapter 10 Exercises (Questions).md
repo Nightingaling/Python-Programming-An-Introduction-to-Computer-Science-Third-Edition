@@ -25,7 +25,7 @@ True/False
 ### 2. A method definition with four formal parameters is generally called with how many actual parameters?
     a) three b) four c) five d) it depends
     
-### 3. A method definition is similar to a(n)
+### 3. A method definition is similar to
     a) loop b) module c) import statement d) function definition
     
 ### 4. Within a method definition, the instance variable x could be accessed via which expression?
