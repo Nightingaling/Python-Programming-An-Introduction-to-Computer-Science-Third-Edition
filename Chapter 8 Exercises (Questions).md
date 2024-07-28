@@ -19,11 +19,11 @@ True/False
 </br>
 
 ## Multiple Choice
-### 1. A loop pattern that asks the user whether to continue on each iteration is called a(n)
+### 1. A loop pattern that asks the user whether to continue on each iteration is called
     a) interactive loop b) end-of-file loop
     c) sentinel loop d) infinite loop
     
-### 2. A loop pattern that continues until a special value is input is called a(n)
+### 2. A loop pattern that continues until a special value is input is called
     a) interactive loop b) end-of-file loop
     c) sentinel loop d) infinite loop
     
@@ -31,7 +31,7 @@ True/False
     a) pre-test loop b) loop and a half
     c) sentinel loop d) post-test loop
 
-### 4. A priming read is part of the pattern for a(n)
+### 4. A priming read is part of the pattern for
     a) interactive loop b) end-of-file loop
     c) sentinel loop d) infinite loop
     
