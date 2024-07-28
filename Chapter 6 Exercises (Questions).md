@@ -25,7 +25,7 @@ True/False
 ### 2. A Python function definition begins with
     a) def b) define c) function d) defun
 
-### 3. A function can send output back to the program with a(n)
+### 3. A function can send output back to the program with
     a) return b) print c) assignment d) SASE
 
 ### 4. Formal and actual parameters are matched up by
