@@ -19,10 +19,10 @@ True/False
 </br>
 
 ## Multiple Choice
-### 1. A method that returns the value of an object's instance variable is called a(n)
+### 1. A method that returns the value of an object's instance variable is called
     a) mutator b) function c) constructor d) accessor
     
-### 2. A method that changes the state of an object is called a(n)
+### 2. A method that changes the state of an object is called
     a) stator b) mutator c) constructor d) changor
     
 ### 3. What graphics class would be best for drawing a square?
@@ -53,7 +53,7 @@ True/False
 ### 8. What kind of object can be used to get text input in a graphics window?
     a) Text b) Entry c) Input d) Keyboard
     
-### 9. A user interface organized around visual elements and user actions is called a(n)
+### 9. A user interface organized around visual elements and user actions is called
     a) GUI b) application c) windower d) API
     
 ### 10. What color is color_rgb(0,255,255)?
