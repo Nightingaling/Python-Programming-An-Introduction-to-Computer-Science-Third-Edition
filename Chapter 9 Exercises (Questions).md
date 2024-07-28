@@ -29,7 +29,7 @@ True/False
     c) Construct a simplified prototype of the system.
     d) Express the algorithm in terms of smaller problems.
     
-### 3. A graphical view of the dependencies among components of a design is called a(n)
+### 3. A graphical view of the dependencies among components of a design is called
     a) flowchart b) prototype c) interface d) structure chart
     
 ### 4. The arrows in a module hierarchy chart depict
