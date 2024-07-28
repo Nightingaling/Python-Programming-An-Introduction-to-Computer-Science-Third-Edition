@@ -44,7 +44,7 @@ True/False
 ### 8. A structure in which one decision leads to another set of decisions, which leads to another set of decisions, etc., is called a decision
     a) network b) web c) tree d) trap
     
-### 9. Taking the square root of a negative value with math.sqrt produces a(n)
+### 9. Taking the square root of a negative value with math.sqrt produces
     a) ValueError b) imaginary number
     c) program crash d) stomachache
     
