@@ -92,11 +92,11 @@ True/False
 
 </br>
 
-### 4. As you will learn in a later chapter, many of the numbers stored in a computer are not exact values, but rather close approximations. For example, the value 0.1 might be stored as 0.10000000000000000555. Usually, such small differences are not a problem; however, given what you have learned about chaotic behavior in Chapter 1, you should realize the need for caution in certain situations. Can you think of examples where this might be a problem? Explain.
+### 4. Many of the numbers stored in a computer are not exact values, but rather close approximations. For example, the value 0.1 might be stored as 0.10000000000000000555. Usually, such small differences are not a problem; however, given what you have learned about chaotic behavior, you should realize the need for caution in certain situations. Can you think of examples where this might be a problem? Explain.
 
 </br>
 
-### 5. Trace through the chaos program from Section 1.6 by hand using 0.15 as the input value. Show the sequence of output that results. 
+### 5. Trace through the chaos program by hand using 0.15 as the input value. Show the sequence of output that results. 
     # File: chaos. py
     # A simple program illustrating chaotic behavior.
     def main():
@@ -126,7 +126,7 @@ True/False
     
 </br>
 
-### 2. Enter and run the chaos program from Section 1.6. Try it out with various values of input to see that it functions as described in the chapter.
+### 2. Enter and run the chaos program. Try it out with various values of input to see that it functions as described.
 
 </br>
 
@@ -154,4 +154,5 @@ True/False
 
 <br/>
 
-### 7. (Advanced) Modify the chaos program so that it accepts two inputs and then prints a table with two columns similar to the one shown in Section 1.8. (Note: You will probably not be able to get the columns to line up as nicely as those in the example. Chapter 5 discusses how to print numbers with a fixed number of decimal places.)
+### 7. (Advanced) Modify the chaos program so that it accepts two inputs and then prints a table with two columns. 
+> Note: You will probably not be able to get the columns to line up as nicely.
