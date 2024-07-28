@@ -30,7 +30,7 @@ True/False
     a) inheritance b) polymorphism
     c) generality d) encapsulation
     
-### 5. Separating the user interface from the "guts" of an application is called a(n) ____ approach.
+### 5. Separating the user interface from the "guts" of an application is called ____ approach.
     a) abstract b) object-oriented
     c) model-theoretic d) model-view
 
