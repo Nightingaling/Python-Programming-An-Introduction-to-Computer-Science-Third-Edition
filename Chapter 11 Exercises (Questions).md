@@ -46,7 +46,7 @@ True/False
 ### 9. Which of the following is not a dictionary method?
     a) get b) keys c) sort d) clear
     
-### 10. The items dictionary method returns a(n)
+### 10. The items dictionary method returns
     a) int b) sequence of tuples c) bool d) dictionary
 
 </br>
