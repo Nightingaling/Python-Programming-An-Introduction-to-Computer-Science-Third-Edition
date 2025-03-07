@@ -2,8 +2,7 @@
 **a) Hardware vs. Software**  
 - **Hardware**: Physical components (e.g., CPU, keyboard).  
 - **Software**: Instructions/programs (e.g., OS, apps).  
-- **Contrast**: Hardware is tangible; software is intangible.  
-- **Similarity**: Both are essential for a functioning computer.  
+- **Contrast**: Hardware is tangible; software is intangible.
 
 **b) Algorithm vs. Program**  
 - **Algorithm**: Abstract step-by-step solution (e.g., a recipe).  
