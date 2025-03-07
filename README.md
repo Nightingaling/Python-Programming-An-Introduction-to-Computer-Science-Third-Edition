@@ -1,5 +1,5 @@
 # -Python-Programming-An-Introduction-to-Computer-Science-Third-Edition
-This project contains solutions to the exercises found in the textbook, [Python Programming: An Introduction to Computer Science, Third Edition](https://www.amazon.com/Python-Programming-Introduction-Computer-Science/dp/1590282752/ref=sr_1_2?ie=UTF8&qid=1516294885&sr=8-2&keywords=python+programming+third+edition)
+This project contains solutions to the exercises found in the textbook, [https://www.pdfdrive.com/python-programming-an-introduction-to-computer-science-e183602644.html]
 
 # Purpose
 The purpose of this project is to learn Python as well as the fundamentals of computer science.
