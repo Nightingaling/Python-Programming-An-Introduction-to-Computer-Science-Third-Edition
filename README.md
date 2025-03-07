@@ -1,4 +1,4 @@
-# Python-Programming-An-Introduction-to-Computer-Science-Third-Edition
+# Python Programming: An Introduction to Computer Science Third Edition
 This project contains solutions to the exercises found in the textbook, [Python Programming: An Introduction to Computer Science, Third Edition](https://www.pdfdrive.com/python-programming-an-introduction-to-computer-science-e183602644.html)
 
 # Purpose
