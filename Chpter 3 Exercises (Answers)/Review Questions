@@ -1,0 +1,13 @@
+1.True
+2.False
+3.False
+4.True
+5.True
+6.False
+7.True
+8.True
+9.True
+10.False
+
+Note: For question 5, the answer (True) was due to the assumption that "squirt" is intended to be "square root".
+      However, if "squirt" is not an acceptable term then the answer should be False.
