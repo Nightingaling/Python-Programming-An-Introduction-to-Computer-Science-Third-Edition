@@ -60,7 +60,6 @@ def main():
         x = 2.0 * x * (1 - x)  # Changed multiplier from 3.9 to 2.0
         print(x)
 main()
-
 ```  
 **Sample Output for Input `0.5`**:  
 ```
