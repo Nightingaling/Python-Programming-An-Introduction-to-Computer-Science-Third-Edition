@@ -158,17 +158,14 @@ Algebraically equivalent expressions can yield different computational results b
 def main():
     x1 = eval(input("Enter the first initial value (0-1): "))
     x2 = eval(input("Enter the second initial value (0-1): "))
-    
     print("Iteration | Value 1 | Value 2")
     print("----------------------------")
     for i in range(10):
         x1 = 3.9 * x1 * (1 - x1)
         x2 = 3.9 * x2 * (1 - x2)
         print(i+1, x1, x2)
-
 main()
 ```  
-
 **Sample Output**:  
 ```
 Iteration | Value 1 | Value 2
