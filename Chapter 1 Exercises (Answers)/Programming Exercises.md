@@ -30,7 +30,8 @@ def main():
         x = 3.9 * x * (1 - x)
         print(x)
 main()
-```  
+```
+
 **Sample Output for Input `0.5`**:  
 ```
 0.5
@@ -60,14 +61,16 @@ def main():
         x = 2.0 * x * (1 - x)  # Changed multiplier from 3.9 to 2.0
         print(x)
 main()
-```  
+```
+
 **Sample Output for Input `0.5`**:  
 ```
 0.5
 0.5
 0.5
 ... (all values stabilize at 0.5)
-```  
+```
+
 **Observation**:  
 With the multiplier reduced to 2.0, the values quickly stabilize instead of exhibiting chaotic behavior. For example, input `0.5` converges immediately to `0.5`. This contrasts with the original program, which produces unpredictable values due to the chaotic multiplier 3.9.
 
@@ -91,7 +94,7 @@ main()
 ---
 
 # **Question 5**  
-**Modified Code**:  
+**Modified Loop**:  
 ```python
 # File: chaos.py 
 # A simple program illustrating chaotic behavior.
@@ -165,7 +168,8 @@ def main():
         x2 = 3.9 * x2 * (1 - x2)
         print(i+1, x1, x2)
 main()
-```  
+```
+
 **Sample Output**:  
 ```
 Iteration | Value 1 | Value 2
