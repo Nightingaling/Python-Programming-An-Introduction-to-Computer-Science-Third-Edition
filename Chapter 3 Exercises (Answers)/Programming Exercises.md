@@ -95,3 +95,94 @@ print("Distance:", distance)
 ---
 
 # **Question 8**
+**Code**:
+```python
+year = int(input("Enter a 4-digit year: "))
+C = year // 100
+epact = (8 + (C // 4) - C + ((8 * C + 13) // 25) + 11 * (year % 19)) % 30
+print("Epact value:", epact)
+```
+
+---
+
+# **Question 9**
+**Code**:
+```python
+import math
+
+a = float(input("Enter side a: "))
+b = float(input("Enter side b: "))
+c = float(input("Enter side c: "))
+
+s = (a + b + c) / 2
+area = math.sqrt(s * (s - a) * (s - b) * (s - c))
+print("Area:", area)
+```
+
+---
+
+# **Question 10**
+**Code**:
+```python
+import math
+
+height = float(input("Enter height: "))
+degrees = float(input("Enter angle in degrees: "))
+
+radians = math.pi / 180 * degrees
+length = height / math.sin(radians)
+print("Ladder length:", length, 'radians')
+```
+
+---
+
+# **Question 11**
+**Code**:
+```python
+n = int(input("Enter n: "))
+total = 0
+for i in range(1, n+1):
+  total = total + i
+print("Sum:", total)
+```
+
+---
+
+# **Question 12**
+**Code**:
+```python
+n = int(input("Enter n: "))
+total = 0
+for i in range(1, n+1):
+  total = total + (i ** 3)
+print("Sum of cubes:", total)
+```
+
+---
+
+# **Question 13**
+**Code**:
+```python
+count = int(input("How many numbers to sum? "))
+total = 0
+for i in range(count):
+    num = float(input("Enter a number: "))
+    total = total + num
+print("Total sum:", total)
+```
+
+---
+
+# **Question 14**
+**Code**:
+```python
+count = int(input("How many numbers? "))
+total = 0
+for i in range(count):
+    num = float(input("Enter a number: "))
+    total = total + num
+average = total / count
+print("Average:", average)
+```
+---
+
