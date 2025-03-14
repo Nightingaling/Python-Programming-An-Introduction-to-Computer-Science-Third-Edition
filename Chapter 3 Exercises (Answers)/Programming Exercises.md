@@ -195,8 +195,11 @@ import math
 n = int(input("Enter the number of terms to sum (n): "))
 total = 0
 
+# First loop: Positive terms
 for i in range(1, n + 1, 2):
     total = total + (4 / (2 * i - 1))
+
+# Second Loop: Negative terms
 for j in range(2, n + 1, 2):
     total = total - (4 / (2 * j - 1))
 
@@ -210,12 +213,12 @@ print("Difference from actual π:", abs(math.pi - total))
 **Code**:
 ```python
 n = int(input("Enter n (n >= 1): "))
-x, y, y2 = 0, 1, 1
+prev_prev, prev, current = 0, 1, 1
 for i in range(1, n):
-    y2 = x + y
-    x = y
-    y = y2
-print(y2)
+    current = prev_prev + prev
+    prev_prev = prev
+    prev = current
+print("The Fibonacci number is:", current)
 ```
 
 ---
