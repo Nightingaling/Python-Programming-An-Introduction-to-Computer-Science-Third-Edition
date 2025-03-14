@@ -184,5 +184,57 @@ for i in range(count):
 average = total / count
 print("Average:", average)
 ```
+
 ---
 
+# **Question 15**
+**Code**:
+```python
+import math
+
+n = int(input("Enter the number of terms to sum (n): "))
+total = 0
+
+for i in range(1, n + 1, 2):
+    total = total + (4 / (2 * i - 1))
+for j in range(2, n + 1, 2):
+    total = total - (4 / (2 * j - 1))
+
+print("Approximation of pi:", total)
+print("Difference from actual π:", abs(math.pi - total))
+```
+
+---
+
+# **Question 16**
+**Code**:
+```python
+n = int(input("Enter n (n >= 1): "))
+x, y, y2 = 0, 1, 1
+for i in range(1, n):
+    y2 = x + y
+    x = y
+    y = y2
+print(y2)
+```
+
+---
+
+# **Question 17**
+**Code**:
+```python
+import math
+
+x = eval(input("Enter the value to find the square root of: "))
+iterations = int(input("Enter the number of iterations: "))
+
+guess = x / 2  # Initial guess
+
+for i in range(iterations):
+    guess = (guess + x / guess) / 2
+
+difference = math.sqrt(x) - guess
+
+print("Estimated square root:", guess)
+print("Difference from math.sqrt(x):", difference)
+```
