@@ -12,7 +12,7 @@ End Date: IN PROGRESS
 # Table of Content & Exercises
 - [X] Computers and Programs
 - [X] Writing Simple Programs
-- [ ] Computing with Numbers
+- [X] Computing with Numbers
 - [ ] Objects and Graphics
 - [ ] Sequences: Strings, Lists, and Files
 - [ ] Defining Functions
