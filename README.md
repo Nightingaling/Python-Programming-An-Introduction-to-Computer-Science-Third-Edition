@@ -13,7 +13,7 @@ End Date: IN PROGRESS
 - [X] Computers and Programs
 - [X] Writing Simple Programs
 - [X] Computing with Numbers
-- [ ] Objects and Graphics
+- [X] Objects and Graphics
 - [ ] Sequences: Strings, Lists, and Files
 - [ ] Defining Functions
 - [ ] Decision Structures
