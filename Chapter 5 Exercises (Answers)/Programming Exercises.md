@@ -37,5 +37,72 @@ print('Your grades is: ', grades[score])
 # **Question 3**
 **Code**:
 ```python
+score = int(input('What is your exam score: '))
+grades = ['F', 'F', 'F', 'F', 'F', 'F', 'D', 'C', 'B', 'A', 'A']
+print("Grade:", grades[score // 10])
+```
 
+# **Question 4**
+**Code**:
+```python
+phrase = input('Phrase: ')
+words = phrase.split()
+acronym = ''
+for word in words:
+    acronym = acronym + word[0].upper()
+print(acronym)
+```
 
+---
+
+# **Question 5**
+**Code**:
+```python
+name = input('Give a Single Name: ')
+total = 0
+for i in name.lower():
+    n = ord(i) - 96
+    total = total + n
+print(total)
+```
+
+---
+
+# **Question 6**
+**Code**:
+```python
+name = input('Give a Full Name: ').lower()
+total = 0
+name = name.replace(" ", '')
+for i in name:
+    n = ord(i) - 96
+    total = total + n
+print(total)
+```
+
+---
+
+# **Question 7**
+**Code**:
+```python
+ch = input('Single Text: ')
+key = int(input('Key: '))
+
+# Encode
+encode = ''
+for i in ch:
+    encode = encode + chr(ord(i) + key)
+print(encode)
+
+#Decode
+decode = ''
+for j in encode:
+    decode = decode + chr(ord(j) - key)
+print(decode)
+```
+
+---
+
+# **Question 8**
+**Code**:
+```python
