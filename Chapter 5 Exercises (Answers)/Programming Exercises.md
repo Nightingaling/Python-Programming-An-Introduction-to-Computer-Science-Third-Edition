@@ -85,7 +85,7 @@ print(total)
 # **Question 7**
 **Code**:
 ```python
-ch = input('Single Text: ')
+ch = input('Text: ')
 key = int(input('Key: '))
 
 # Encode
