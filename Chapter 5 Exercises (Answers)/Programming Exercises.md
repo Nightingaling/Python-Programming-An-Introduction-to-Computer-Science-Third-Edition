@@ -106,3 +106,46 @@ print(decode)
 # **Question 8**
 **Code**:
 ```python
+# Get the input text from the user
+ch = input('Text: ')
+
+# Get the key value from the user
+key = int(input('Key: '))
+
+# Initialize an empty string to store the encoded result
+encoded = ''
+
+# Loop through each character in the input text
+for c in ch:
+    # Calculate the position of the character in the alphabet (0-25)
+    pos = ord(c) - ord('a')
+    # Calculate new position with circular shift, (there are 26 alphabets thus % 26)
+    new_pos = (pos + key) % 26
+    # Convert new position back to a character and add to result
+    encoded = encoded + chr(new_pos + ord('a'))
+
+# Print the encoded text
+print('Encoded:', encoded)
+
+# Initialize an empty string to store the decoded result
+decoded = ''
+
+# Loop through each character in the encoded text
+for c in encoded:
+    # Calculate the position of the character in the alphabet (0-25)
+    pos = ord(c) - ord('a')
+    # Calculate original position by reversing the shift
+    new_pos = (pos - key) % 26
+    # Convert original position back to a character and add to result
+    decoded = decoded + chr(new_pos + ord('a'))
+
+# Print the decoded text
+print('Decoded:', decoded)
+```
+> Note: The problem cannot be fully solved for inputs containing both uppercase and lowercase letters along with spaces using only the concepts covered in chapters 1 to 5. The code I have developed is designed to work specifically with lowercase letters and does not handle uppercase letters or spaces in the input text.
+
+---
+
+# **Question 9**
+**Code**:
+```python
