@@ -149,3 +149,11 @@ print('Decoded:', decoded)
 # **Question 9**
 **Code**:
 ```python
+<code>
+```
+
+---
+
+# **Question 9**
+**Code**:
+```python
