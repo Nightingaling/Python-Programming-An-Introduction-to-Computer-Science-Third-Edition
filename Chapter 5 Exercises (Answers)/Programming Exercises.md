@@ -149,11 +149,25 @@ print('Decoded:', decoded)
 # **Question 9**
 **Code**:
 ```python
-<code>
+sentence = input('Sentence: ').split()
+print('Word Count: ', len(sentence))
 ```
 
 ---
 
 # **Question 10**
+**Code**:
+```python
+sentence = input('Sentence: ').split()
+letter_count = 0
+for word in sentence:
+    letter_count = letter_count + len(word)
+average = letter_count / len(sentence)
+print('Average Word Length: ', average)
+```
+
+---
+
+# **Question 11**
 **Code**:
 ```python
