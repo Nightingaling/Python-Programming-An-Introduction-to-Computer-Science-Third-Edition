@@ -243,3 +243,23 @@ main()
 # **Question 14**
 **Code**:
 ```python
+def main():
+    wc_file = input('File: ')
+    infile = open(wc_file, 'r')
+    line_count = 0
+    word_count = 0
+    character_count = 0
+    for line in infile:
+        word_count = word_count + len(line.split())
+        character_count = character_count + len(line)
+        line_count = line_count + 1
+    print('Lines: {0}\nWords: {1}\nCharacters: {2}'.format(line_count, word_count, character_count))
+    
+main()
+```
+
+---
+
+# **Question 15**
+**Code**:
+```python
