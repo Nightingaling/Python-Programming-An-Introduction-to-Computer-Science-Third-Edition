@@ -89,7 +89,7 @@ def main():
     apr = float(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
     years = int(input("Enter the number of years: "))
     for i in range(years):
-        principal *= (1 + apr)
+        principal = principal * (1 + apr)
     print("The value after", years, "years is: $", principal)
     input("Press the <Enter> key to quit.")
 main()
