@@ -199,7 +199,7 @@ def main():
     principal = eval(input("Enter the initial principal: "))
     apr = float(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
     years = int(input("Enter the number of years: "))
-    print("{0} {1:>7}".format('Year', 'Value'))
+    print("{0} ${1:>7}".format('Year', 'Value'))
     print('--------------')
     print("{0:^5} ${1:0.2f}".format('0', principal))
     for i in range(years):
@@ -211,5 +211,35 @@ main()
 ---
 
 # **Question 13**
+**Code**:
+```python
+# Batch-oriented for Question 9
+
+def main():
+    # get the file names
+    sentence_file = input('What file is the sentence in? ')
+    word_count_file = input('What file should the word count go in? ')
+
+    #open and read the input file
+    infile = open(sentence_file, 'r')
+    sentence = infile.read()
+    infile.close()
+
+    # process the sentence
+    word_list = sentence.split()
+    word_count = len(word_list)
+
+    # open and write to output file
+    
+    outfile = open(word_count_file, 'w')
+    print(word_count, file=outfile)
+    outfile.close()
+    
+main()
+```
+
+---
+
+# **Question 14**
 **Code**:
 ```python
