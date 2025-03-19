@@ -86,7 +86,7 @@ main()
 def main():
     print("This program calculates the future value")
     principal = eval(input("Enter the initial principal: "))
-    apr = eval(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
+    apr = float(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
     years = int(input("Enter the number of years: "))
     for i in range(years):
         principal *= (1 + apr)
