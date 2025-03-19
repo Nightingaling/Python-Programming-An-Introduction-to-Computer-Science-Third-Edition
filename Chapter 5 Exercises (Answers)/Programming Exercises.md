@@ -171,3 +171,45 @@ print('Average Word Length: ', average)
 # **Question 11**
 **Code**:
 ```python
+# File: chaos.py 
+# A simple program illustrating chaotic behavior.
+
+def main():
+    x1 = eval(input("Enter the first initial value (0-1): "))
+    x2 = eval(input("Enter the second initial value (0-1): "))
+    iterations = int(input("Enter the number of iterations: "))
+    print("{0:>5} {1:>7} {2:>10}".format("Index", x1, x2))
+    print("------------------------------")
+    for i in range(iterations):
+        x1 = 3.9 * x1 * (1 - x1)
+        x2 = 3.9 * x2 * (1 - x2)
+        print("{0:^5} {1:^10f} {2:^10f}".format((i+1), round(x1, 6), round(x2, 6)))
+main()
+```
+
+---
+
+# **Question 12**
+**Code**:
+```python
+# futval.py
+# A program to compute the value of an investment
+def main():
+    print("This program calculates the future value")
+    principal = eval(input("Enter the initial principal: "))
+    apr = float(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
+    years = int(input("Enter the number of years: "))
+    print("{0} {1:>7}".format('Year', 'Value'))
+    print('--------------')
+    print("{0:^5} ${1:0.2f}".format('0', principal))
+    for i in range(years):
+        principal = principal * (1 + apr)
+        print("{0:^5} ${1:0.2f}".format((i + 1), principal))
+main()
+```
+
+---
+
+# **Question 13**
+**Code**:
+```python
