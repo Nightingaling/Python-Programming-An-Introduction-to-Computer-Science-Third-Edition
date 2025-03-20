@@ -230,7 +230,6 @@ def main():
     word_count = len(word_list)
 
     # open and write to output file
-    
     outfile = open(word_count_file, 'w')
     print(word_count, file=outfile)
     outfile.close()
