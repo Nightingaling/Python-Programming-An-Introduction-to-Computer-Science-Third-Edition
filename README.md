@@ -14,7 +14,7 @@ End Date: IN PROGRESS
 - [X] Writing Simple Programs
 - [X] Computing with Numbers
 - [X] Objects and Graphics
-- [ ] Sequences: Strings, Lists, and Files
+- [X] Sequences: Strings, Lists, and Files
 - [ ] Defining Functions
 - [ ] Decision Structures
 - [ ] Loop Structures and Booleans
