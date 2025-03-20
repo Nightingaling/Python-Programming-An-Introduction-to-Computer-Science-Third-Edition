@@ -263,3 +263,92 @@ main()
 # **Question 15**
 **Code**:
 ```python
+from graphics import *
+
+def main():
+    # Open and read the exam scores file
+    score_file = open('exam_scores.txt', 'r')
+    file_lines = score_file.readlines()
+    num_students = int(file_lines[0])
+    score_file.close()
+
+    # Set up the graphics window
+    window_height = num_students * 20  # Adjust height based on number of students
+    win = GraphWin('Exam Scores', 300, window_height)
+    win.setCoords(0, 0, 3, num_students)  # Set coordinate system for proper alignment
+
+    # Initialize positions for drawing elements
+    text_y_position = num_students - 0.5  # Starting Y position for student names
+    bar_y_position = num_students - 1     # Starting Y position for score bars
+
+    # Draw each student's name and corresponding score bar
+    for i in range(1, num_students + 1):
+        # Extract student name and score from the current line
+        student_name = file_lines[i].split()[0]
+        student_score = int(file_lines[i].split()[1])
+        
+        # Draw student name
+        name_point = Point(0.5, text_y_position)
+        Text(name_point, student_name).draw(win)
+        
+        # Calculate bar length (scaled to fit within window)
+        bar_length = 1 + student_score / 50
+        
+        # Draw score bar
+        bar_start = Point(1, text_y_position + 0.25)
+        bar_end = Point(bar_length, bar_y_position + 0.25)
+        Rectangle(bar_start, bar_end).draw(win)
+        
+        # Move down to the next position for the next student
+        text_y_position = text_y_position - 1
+        bar_y_position = bar_y_position - 1
+
+    # Wait for user interaction before closing
+    win.getMouse()
+    win.close()
+
+main()
+```
+
+---
+
+# **Question 16**
+**Code**:
+```python
+from graphics import *
+
+def main():
+    # Create graphics window
+    window = GraphWin('Quiz Score', 250, 250)
+    
+    # Open and read the score file
+    score_file = open('quiz_score.txt', 'r')
+    file_contents = score_file.read()
+    score_file.close()
+
+    # Initialize coordinates for drawing
+    bar_x, bar_y = 25, 230
+    label_x, label_y = 30, 240
+    
+    # Draw bars and labels for each score
+    for score_value in range(11):
+        # Calculate the height based on the count of the current score
+        count = file_contents.count(str(score_value))
+        bar_height = count * 10
+        
+        # Draw the rectangle bar
+        Rectangle(Point(bar_x, bar_y), Point(bar_x + 10, bar_y - bar_height)).draw(window)
+        
+        # Draw the score label
+        Text(Point(label_x, label_y), score_value).draw(window)
+        
+        # Move to the next position for the next score
+        bar_x = bar_x + 20
+        label_x = label_x + 20
+    
+    # Wait for user click before closing
+    window.getMouse()
+    window.close()
+
+main()
+```        
