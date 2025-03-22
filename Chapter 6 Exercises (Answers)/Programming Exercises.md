@@ -355,8 +355,60 @@ win.close()
 # **Question 16**
 **Code**:
 ```python
-<code>
+from graphics import *
+from math import *
+
+def drawFace(center, size, win):
+
+    #Head
+    head = Circle(center, size)
+    head.setFill('yellow')
+    head.draw(win)
+
+    coordX = center.getX() - size / 2
+    coordY = center.getY() - size / 2
+
+    # Eyes
+    left_eye = Circle(Point(coordX, coordY), size * 0.15)
+    left_eye.setFill("black")
+    left_eye.draw(win)
+
+    right_eye = Circle(Point(coordX + size, coordY), size * 0.15)
+    right_eye.setFill("black")
+    right_eye.draw(win)
+
+    # Smiling mouth (arc)
+    mouth = Polygon(Point(coordX, center.getY() + size * 0.6),
+                    Point(center.getX(), center.getY() + size),
+                    Point(coordX + size, center.getY() + size * 0.6),
+                    Point(center.getX(), center.getY() + size * 0.75)
+                    )
+    mouth.setFill("red")
+    mouth.draw(win)
+
+    # Nose (triangle)
+    nose = Polygon(center,
+                   Point(center.getX() - size * 0.1, center.getY() + size * 0.25),
+                   Point(center.getX() + size * 0.1, center.getY() + size * 0.25))
+    nose.setFill("orange")
+    nose.draw(win)       
+
+win = GraphWin('Smiley Face', 1000, 500)
+win.setBackground('lightgray')
+gif = input('Image File: ')
+Image(Point(500,250), gif).draw(win)
+faces = int(input('How many faces are to be blocked: '))
+for i in range(faces):
+    center_face = win.getMouse()
+    edge_face = win.getMouse()
+    dx = center_face.getX() - edge_face.getX()
+    dy = center_face.getY() - edge_face.getY()
+    size = sqrt(dx**2 + dy**2)
+    drawFace(center_face, size, win)
+win.getMouse()
+win.close()
 ```
+> Note: The current implementation uses a fixed window size and a fixed anchor point for the image. Since the original image is larger than the window, this approach only displays the center portion of the image. The image is centered at the window’s midpoint, but because the window does not match the image’s actual dimensions, only the central region of the image is visible. This effectively "crops" the image to the window’s size, leaving faces outside this area inaccessible for anonymization. Thus, with the current limitations, the current implementation is unable to dynamically adjusting the window size to match the image.
 
 ---
 
