@@ -19,7 +19,7 @@ def main():
         square.draw(win)
     
     # (c) Final message and exit click
-    message = Text(Point(win.getWidth()/2, win.getHeight() - 30), "Click again to quit")
+    message = Text(Point(250, 470), "Click again to quit")
     message.setSize(15)
     message.draw(win)
     win.getMouse()
