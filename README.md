@@ -15,8 +15,8 @@ End Date: IN PROGRESS
 - [X] Computing with Numbers
 - [X] Objects and Graphics
 - [X] Sequences: Strings, Lists, and Files
-- [ ] Defining Functions
-- [ ] Decision Structures
+- [X] Defining Functions
+- [X] Decision Structures
 - [ ] Loop Structures and Booleans
 - [ ] Simulation and Design
 - [ ] Defining Classes
