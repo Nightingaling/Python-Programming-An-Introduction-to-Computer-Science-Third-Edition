@@ -17,7 +17,7 @@ End Date: IN PROGRESS
 - [X] Sequences: Strings, Lists, and Files
 - [X] Defining Functions
 - [X] Decision Structures
-- [ ] Loop Structures and Booleans
+- [X] Loop Structures and Booleans
 - [ ] Simulation and Design
 - [ ] Defining Classes
 - [ ] Data Collections
