@@ -253,6 +253,7 @@ def main():
         character_count = character_count + len(line)
         line_count = line_count + 1
     print('Lines: {0}\nWords: {1}\nCharacters: {2}'.format(line_count, word_count, character_count))
+    infile.close()
     
 main()
 ```
