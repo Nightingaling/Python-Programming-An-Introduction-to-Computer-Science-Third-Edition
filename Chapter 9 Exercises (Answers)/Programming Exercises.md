@@ -572,5 +572,39 @@ print("Probability of winning craps: {0:0.3}".format(win/n))
 # **Question 8**
 **Code**:
 ```python
+from random import randrange
+
+n = int(input('How many games of blackjack to simulate: '))
+bust = 0
+for i in range(n):
+    hand = 0
+    hasAce = False
+    while True:
+        drawcard = randrange(1, 11)
+        hand = hand + drawcard
+        if drawcard == 1 and hasAce == False:
+            hand = hand + 10
+            hasAce = True
+
+        #bust or win
+        if hand > 21:
+            if hasAce == True:
+                hand = hand - 10
+                if hand >= 17 and hand <= 21:
+                    break
+            else:
+                bust = bust + 1
+                break
+        elif hand >= 17 and hand <= 21:
+            break
+        
+print("Probability of dealer bust: {0:0.3}".format(bust/n))
+```
+
+---
+
+# **Question 9**
+**Code**:
+```python
 <code>
 ```
