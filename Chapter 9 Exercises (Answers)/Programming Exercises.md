@@ -604,7 +604,229 @@ print("Probability of dealer bust: {0:0.3}".format(bust/n))
 ---
 
 # **Question 9**
+**Modified Code**:
+```python
+from random import randrange
+
+n = int(input('How many games of blackjack to simulate for each starting value: '))
+for i in range(1, 11): #from ace to 10
+    bust = 0
+    for j in range(n): #reinteration of n games for each starting card
+        hasAce = False
+        if i == 1:
+            hand = 11
+            hasAce = True
+        else:
+            hand = i
+        while True:
+            drawcard = randrange(1, 11)
+            hand = hand + drawcard
+            if drawcard == 1 and hasAce == False:
+                hand = hand + 10
+                hasAce = True
+
+            #bust or win
+            if hand > 21:
+                if hasAce == True:
+                    hand = hand - 10
+                    if hand >= 17 and hand <= 21:
+                        break
+                else:
+                    bust = bust + 1
+                    break
+            elif hand >= 17 and hand <= 21:
+                break
+    if i == 1:
+        print("Probability of dealer bust for Ace: {0:0.3}".format(bust/n))
+    else:
+        print("Probability of dealer bust for {0}: {1:0.3}".format(i,bust/n))
+```
+
+---
+
+# **Question 10**
 **Code**:
 ```python
-<code>
+from random import random
+
+n = int(input('How many darts to throw: '))
+h = 0
+for i in range(n):
+    x = 2 * random() - 1
+    y = 2 * random() - 1
+    if (x ** 2) + (y ** 2) <= 1:
+        h = h + 1
+print(4 * (h/n))
+```
+
+---
+
+# **Question 11**
+**Code**:
+```python
+from random import randrange
+
+n = int(input('How many rolls to get 5 of a kind: '))
+five_of_a_kind = 0
+for i in range(n):
+    dice1 = randrange(1,7)
+    dice2 = randrange(1,7)
+    dice3 = randrange(1,7)
+    dice4 = randrange(1,7)
+    dice5 = randrange(1,7)
+    if dice1 == dice2 == dice3 == dice4 == dice5:
+        five_of_a_kind = five_of_a_kind + 1
+print("Probability of 5 of a kind: {0:0.3}".format(five_of_a_kind/n))
+```
+
+---
+
+# **Question 12**
+**Code**:
+```python
+from random import randrange
+
+n = int(input("Number of coin flips: "))
+trials = int(input("Number of trials: "))
+total_distance = 0
+
+for j in range(trials):
+    position = 0
+    for i in range(n):
+        if randrange(0, 2) == 1:
+            position = position + 1
+        else:
+            position = position - 1
+    total_distance = total_distance + abs(position)
+
+average_distance = total_distance / trials
+print("Average distance after {0} steps: {1:0.2}".format(n, average_distance))
+```
+
+---
+
+# **Question 13**
+**Modified Code**:
+```python
+from random import randrange
+import math
+
+trials = int(input("Number of trials: "))
+steps = int(input("Number of steps per trial: "))
+total_distance = 0
+
+for i in range(trials):
+    x, y = 0, 0  # Start at origin
+    for j in range(steps):
+        direction = randrange(0, 4)
+        if direction == 0:
+            y = y + 1
+        elif direction == 1:
+            y = y - 1
+        elif direction == 2:
+            x = x + 1
+        else:
+            x = x - 1
+    distance = math.sqrt(x**2 + y**2)  # Euclidean distance
+    total_distance = total_distance + distance
+
+average_distance = total_distance / trials
+print("Expected distance after {0} steps: {1:0.2}".format(steps, average_distance))
+```
+
+---
+
+# **Question 14**
+**Modified Code**:
+```python
+from graphics import *
+from math import *
+from random import random
+
+win = GraphWin("Simulation",500,500)
+win.setCoords(-50,-50,50,50)
+
+n = int(input('Number of steps: '))
+x, y = 0, 0 #start at origin
+for i in range(n):
+    current_step = Point(x, y)
+    angle = random() * 2 * pi
+    x = x + cos(angle)
+    y = y + sin(angle)
+    Line(Point(current_step.getX(), current_step.getY()), Point(x, y)).draw(win)
+```
+
+---
+
+# **Question 15**
+**Code**:
+```python
+import math
+from random import random
+
+def simulate(n_samples):
+    count = 0
+    for i in range(n_samples):
+        # Generate random direction on a sphere (Marsaglia method)
+        while True:
+            u = random() * 2 - 1
+            v = random() * 2 - 1
+            s = u*u + v*v
+            if s < 1:
+                break
+        sqrt_term = math.sqrt(1 - s)
+        dx = 2 * u * sqrt_term
+        dy = 2 * v * sqrt_term
+        dz = 1 - 2 * s
+
+        # Track the closest wall
+        smallest_t = 1000000000  # Initialize with a large value
+        is_front = False
+
+        # Check front wall (x=1)
+        if dx > 0:
+            t = 0.5 / dx
+            if t < smallest_t:
+                smallest_t = t
+                is_front = True
+
+        # Check back wall (x=-1)
+        if dx < 0:
+            t = -1.5 / dx
+            if t < smallest_t:
+                smallest_t = t
+                is_front = False
+
+        # Check y=1 and y=-1
+        if dy > 0:
+            t = 1 / dy
+            if t < smallest_t:
+                smallest_t = t
+                is_front = False
+        elif dy < 0:
+            t = -1 / dy
+            if t < smallest_t:
+                smallest_t = t
+                is_front = False
+
+        # Check z=1 and z=-1
+        if dz > 0:
+            t = 1 / dz
+            if t < smallest_t:
+                smallest_t = t
+                is_front = False
+        elif dz < 0:
+            t = -1 / dz
+            if t < smallest_t:
+                smallest_t = t
+                is_front = False
+
+        if is_front:
+            count = count + 1
+
+    return count / n_samples
+
+# Run simulation
+result = simulate(1000000)
+print("Fraction of vision occupied by closest wall: {0:0.4}".format(result))
 ```
