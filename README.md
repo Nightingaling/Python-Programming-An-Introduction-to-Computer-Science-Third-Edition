@@ -18,7 +18,7 @@ End Date: IN PROGRESS
 - [X] Defining Functions
 - [X] Decision Structures
 - [X] Loop Structures and Booleans
-- [ ] Simulation and Design
+- [X] Simulation and Design
 - [ ] Defining Classes
 - [ ] Data Collections
 - [ ] Object-Oriented Design
