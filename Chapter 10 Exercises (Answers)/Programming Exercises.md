@@ -724,6 +724,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+> In order for the graphics window to accommodate five card images, the card image must be small.
 
 ---
 
