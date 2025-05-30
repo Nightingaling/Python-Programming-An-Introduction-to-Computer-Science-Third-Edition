@@ -62,7 +62,7 @@ while button.clicked(win.getMouse()) == True:
 ---
 
 # **Question 3**
-**Modified Code**:
+**Code**:
 ```python
 from graphics import *
 from button import Button
@@ -248,6 +248,487 @@ if __name__ == "__main__":
 
 # **Question 5**
 **Modified Code**:
+```python
+class Student:
+    def __init__(self, name, hours, qpoints):
+        self.name = name
+        self.hours = float(hours)
+        self.qpoints = float(qpoints)
+    
+    def getName(self): 
+        return self.name
+    
+    def getHours(self): 
+        return self.hours
+    
+    def getQPoints(self): 
+        return self.qpoints
+    
+    def gpa(self):
+        if self.hours == 0:
+            return 0.0
+        return self.qpoints / self.hours
+
+    def addGrade(self, gradePoint, credits):
+        self.qpoints = self.qpoints + (gradePoint * credits)
+        self.hours = self.hours + credits
+
+def main():
+    # Create student with initial 0 credits and quality points
+    student = Student("", 0, 0)
+    
+    n = int(input('Number of courses taken: '))
+    for i in range(n):
+        gp = float(input('Grade points for course {0}: '.format(i+1)))
+        cr = float(input('Credit hours: '))
+        student.addGrade(gp, cr)
+    
+    print('Final GPA: {0:0.2f}'.format(student.gpa()))
+
+if __name__ == '__main__':
+    main()
+```
+
+---
+
+# **Question 6**
+**Modified Code**:
+```python
+class Student:
+    def __init__(self, name, hours, qpoints):
+        self.name = name
+        self.hours = float(hours)
+        self.qpoints = float(qpoints)
+    
+    def getName(self): 
+        return self.name
+    
+    def getHours(self): 
+        return self.hours
+    
+    def getQPoints(self): 
+        return self.qpoints
+    
+    def gpa(self):
+        if self.hours == 0:
+            return 0.0
+        return self.qpoints / self.hours
+
+    def addGrade(self, gradePoint, credits):
+        self.qpoints = self.qpoints + (gradePoint * credits)
+        self.hours = self.hours + credits
+
+    def addLetterGrade(self, letterGrade, credits):
+        # Convert to uppercase and remove whitespace
+        grade = letterGrade.upper().strip()
+        gp = 0.0
+        
+        # Map letter grades to grade points using if/elif chain
+        if grade == "A":
+            gp = 4.0
+        elif grade == "A-":
+            gp = 3.7
+        elif grade == "B+":
+            gp = 3.3
+        elif grade == "B":
+            gp = 3.0
+        elif grade == "B-":
+            gp = 2.7
+        elif grade == "C+":
+            gp = 2.3
+        elif grade == "C":
+            gp = 2.0
+        elif grade == "C-":
+            gp = 1.7
+        elif grade == "D+":
+            gp = 1.3
+        elif grade == "D":
+            gp = 1.0
+        elif grade == "F":
+            gp = 0.0
+        else:
+            print("Invalid grade '{0}' - course skipped".format(letterGrade))
+            return
+        
+        # Add the valid grade
+        self.addGrade(gp, credits)
+
+def main():
+    # Create student with initial 0 credits and quality points
+    student = Student("", 0, 0)
+    
+    n = int(input('Number of courses taken: '))
+    for i in range(n):
+        lg = input('Letter grade for course {0}: '.format(i+1))
+        cr = float(input('Credit hours: '))
+        student.addLetterGrade(lg, cr)
+    
+    print('Final GPA: {0:0.2f}'.format(student.gpa()))
+
+if __name__ == '__main__':
+    main()
+```
+
+---
+
+# **Question 7**
+**Modified Code**:
+```python
+#button.py
+from graphics import *
+from math import *
+
+class CButton:
+
+    """A button is a labeled rectangle in a window.
+    It is activated or deactivated with the activate()
+    and deactivate() methods. The clicked(p) method
+    returns True if the button is active and p is inside it."""
+
+    def __init__(self, win, center, radius, label):
+        """Creates a circular button, eg:
+        qb = Button(myWin, centerPoint, radius, 'Quit')"""
+        self.cX = center.getX()
+        self.cY = center.getY()
+        self.radius = radius
+        self.circle = Circle(center, radius)
+        self.circle.setFill('lightgray')
+        self.circle.draw(win)
+        self.label = Text(center, label)
+        self.label.draw(win)
+        self.deactivate()
+
+    def clicked(self, p):
+        "Returns True if button active and p is inside"
+        a = sqrt((self.cX - p.getX())**2 + (self.cY - p.getY())**2)
+        return (self.active and a <= self.radius)
+
+
+    def getLabel(self):
+        "Returns the label string of this button."
+        return self.label.getText()
+
+    def activate(self):
+        "Sets this button to 'active'."
+        self.label.setFill('black')
+        self.circle.setWidth(2)
+        self.active = True
+
+    def deactivate(self):
+        "Sets this button to 'inactive'."
+        self.label.setFill('darkgrey')
+        self.circle.setWidth(1)
+        self.active = False
+```
+
+---
+
+# **Question 8**
+**Modified Code**:
+```python
+# dieview.py
+from graphics import *
+class DieView:
+    """ DiewView is a widget that displays a graphical representation
+    of a standard six-sided die."""
+
+    def __init__(self, win, center, size):
+        """Create a view of a die, e.g.: 
+            d1 = DieView(myWin, Point(40,50), 20) 
+        creates a die centered at (40,50) having sides 
+        of length 20."""
+        
+        # first define some standard values 
+        self.win = win           # save this for drawing pips later 
+        self.background = "white"# color of die face 
+        self.foreground = "black"# color of the pips
+        self.psize = 0.1 * size  # radius of each pip
+        hsize = size / 2.0       # half the size of the die 
+        offset = 0.6 * hsize     # distance from center to outer pips
+        
+        # create a square for the face 
+        cx, cy = center.getX(), center.getY() 
+        p1 = Point(cx-hsize, cy-hsize) 
+        p2 = Point(cx+hsize, cy+hsize) 
+        rect = Rectangle(p1,p2) 
+        rect.draw(win) 
+        rect.setFill(self.background)
+        
+        # Create 7 circles for standard pip locations 
+        self.pip1 = self.__makePip(cx-offset, cy-offset) 
+        self.pip2 = self.__makePip(cx-offset, cy) 
+        self.pip3 = self.__makePip(cx-offset, cy+offset) 
+        self.pip4 = self.__makePip(cx, cy) 
+        self.pip5 = self.__makePip(cx+offset, cy-offset) 
+        self.pip6 = self.__makePip(cx+offset, cy) 
+        self.pip7 = self.__makePip(cx+offset, cy+offset)
+        
+        # Draw an initial value 
+        self.setValue(1)
+
+    def __makePip(self, x, y): 
+        "Internal helper method to draw a pip at (x,y)" 
+        pip = Circle(Point(x,y), self.psize) 
+        pip.setFill(self.background) 
+        pip.setOutline(self.background) 
+        pip.draw(self.win) 
+        return pip 
+
+    def setValue(self, value): 
+        "Set this die to display value." 
+        # turn all pips off
+        self.value = value
+        self.pip1.setFill(self.background) 
+        self.pip2.setFill(self.background) 
+        self.pip3.setFill(self.background)
+        self.pip4.setFill(self.background) 
+        self.pip5.setFill(self.background) 
+        self.pip6.setFill(self.background)
+        self.pip7.setFill(self.background)
+
+        #turn correct pips on
+        if value == 1:
+            self.pip4.setFill(self.foreground)
+        elif value == 2:
+            self.pip1.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+        elif value == 3:
+            self.pip1.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+            self.pip4.setFill(self.foreground)
+        elif value == 4:
+            self.pip1.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+        elif value == 5:
+            self.pip1.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip4.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+        else:
+            self.pip1.setFill(self.foreground)
+            self.pip2.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip6.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+
+    def setColor(self, color):
+        self.foreground = color
+        self.setValue(self.value)
+```
+
+---
+
+# **Question 9**
+**Code**:
+```python
+from math import *
+
+class Sphere:
+
+    def __init__(self, radius):
+        self.radius = radius
+
+    def getRadius(self):
+        return self.radius
+
+    def surfaceArea(self):
+        return (4 * pi * (self.radius ** 2))
+        
+    def volume(self):
+        return (4/3 * pi * (self.radius ** 3))
+
+def main():
+    r = float(input('Enter the radius of a sphere: '))
+    sphere = Sphere(r)
+    print('The volume of the sphere is:', sphere.volume())
+    print('The surface area of the sphere is:', sphere.surfaceArea())
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# **Question 10**
+**Modified Code**:
+```python
+class Cube:
+
+    def __init__(self, length):
+        self.length = length
+
+    def getLength(self):
+        return self.length
+
+    def surfaceArea(self):
+        return ((self.length ** 2) * 6)
+        
+    def volume(self):
+        return (self.length ** 3)
+
+def main():
+    l = float(input('Enter the length of a cube: '))
+    cube = Cube(l)
+    print('The volume of the cube is:', cube.volume())
+    print('The surface area of the cube is:', cube.surfaceArea())
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# **Question 11**
+**Code**:
+```python
+from random import randrange
+
+class Card:
+
+    def __init__(self, rank, suit):
+        if suit == "d":
+            self.suit = 'Diamonds'
+        elif suit == "c":
+            self.suit = 'Clubs'
+        elif suit == 'h':
+            self.suit = 'Hearts'
+        else:
+            self.suit = 'Spades'
+
+        # Store rank as integer for value calculation
+        self.rank = rank
+
+        # Set display rank
+        if rank == 1:
+            self.display_rank = 'Ace'
+        elif rank == 11:
+            self.display_rank = 'Jack'
+        elif rank == 12:
+            self.display_rank = 'Queen'
+        elif rank == 13:
+            self.display_rank = 'King'
+        else:
+            self.display_rank = str(rank)
+        
+
+    def getRank(self):
+        return self.rank # Return numeric rank
+
+    def getSuit(self):
+        return self.suit
+
+    def value(self):
+        # Calculate Blackjack value
+        if self.rank in [11, 12, 13]: # Face cards
+            return 10
+        else:
+            return self.rank # Ace = 1, others = their value
+
+    def __str__(self):
+        return ('{0} of {1}'.format(self.display_rank, self.suit))
+
+def main():
+    suits = ['d','c','h','s']
+    total = 0
+    n = int(input('Number of cards to generate: '))
+    for i in range(n):
+        card_num = randrange(1, 14)
+        suit = suits[randrange(0,4)]
+        c = Card(card_num, suit)
+        total = total + c.value()
+        print(c)
+    print('The associated Blackjack value of {0} numbers of cards is: {1}'.format(n, total))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# **Question 12**
+**Modified Code**:
+```python
+from random import randrange
+from graphics import *
+
+class Card:
+
+    def __init__(self, rank, suit):
+        if suit == "d":
+            self.suit = 'Diamonds'
+        elif suit == "c":
+            self.suit = 'Clubs'
+        elif suit == 'h':
+            self.suit = 'Hearts'
+        else:
+            self.suit = 'Spades'
+
+        # Store rank as integer for value calculation
+        self.rank = rank
+
+        # Set display rank
+        if rank == 1:
+            self.display_rank = 'Ace'
+        elif rank == 11:
+            self.display_rank = 'Jack'
+        elif rank == 12:
+            self.display_rank = 'Queen'
+        elif rank == 13:
+            self.display_rank = 'King'
+        else:
+            self.display_rank = str(rank)
+        
+
+    def getRank(self):
+        return self.rank # Return numeric rank
+
+    def getSuit(self):
+        return self.suit
+
+    def value(self):
+        # Calculate Blackjack value
+        if self.rank in [11, 12, 13]: # Face cards
+            return 10
+        else:
+            return self.rank # Ace = 1, others = their value
+
+    def __str__(self):
+        return ('{0} of {1}'.format(self.display_rank, self.suit))
+
+    def draw(self, win, center):
+        filename = "{0}_of_{1}.png".format(self.display_rank, self.suit)
+        Image(center, filename.lower()).draw(win)
+
+def main():
+    win = GraphWin("Cards", 700, 700)
+    suits = ['d','c','h','s']
+    total = x = 0
+    for i in range(5):
+        card_num = randrange(1, 14)
+        suit = suits[randrange(0,4)]
+        c = Card(card_num, suit)
+        total = total + c.value()
+        x = x + 100
+        c.draw(win, Point(x,350))
+        print(c)
+    print('The associated Blackjack value of 5 numbers of cards is: {0}'.format(total))
+
+    # close win
+    win.getMouse()
+    win.close()
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# **Question 13**
+**Code**:
 ```python
 <code>
 ```
