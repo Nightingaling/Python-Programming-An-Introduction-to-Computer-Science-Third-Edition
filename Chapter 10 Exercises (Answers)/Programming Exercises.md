@@ -731,5 +731,116 @@ if __name__ == "__main__":
 # **Question 13**
 **Code**:
 ```python
+# face.py
+from graphics import *
+
+class Face:
+    
+    def __init__(self, window, center, size):
+        # Display face
+        eyeSize = 0.15 * size 
+        eyeOff = size / 3.0
+        mouthSize = 0.8 * size
+        mouthOff = size / 2.0
+        self.head = Circle(center,size)
+        self.head.draw(window) 
+        self.leftEye = Circle(center, eyeSize) 
+        self.leftEye.move(-eyeOff, -eyeOff) 
+        self.rightEye = Circle(center, eyeSize) 
+        self.rightEye.move(eyeOff, -eyeOff) 
+        self.leftEye.draw(window) 
+        self.rightEye.draw(window) 
+        p1 = center.clone() 
+        p1.move(-mouthSize/2, mouthOff) 
+        p2 = center.clone() 
+        p2.move(mouthSize/2, mouthOff)
+        self.mouth = Line(p1,p2)
+        self.mouth.draw(window)
+
+        # Display text of facial expressions
+        buttonsY = textY = center.getY() + size + 50
+        j = 0
+        for i in range(-100, 101, 100):
+            textX = center.getX() + i
+            self.label = Text(Point(textX, textY), ['Smile', 'Wink', 'Frown'][j])
+            self.label.draw(window)
+            j = j + 1
+
+        # Display Smile button
+        self.smilebutton_p1 = Point(center.getX() - 125, buttonsY - 10)
+        self.smilebutton_p2 = Point(center.getX() - 75, buttonsY + 10)
+        Rectangle(self.smilebutton_p1, self.smilebutton_p2).draw(window)
+
+        # Display Wink button
+        self.winkbutton_p1 = Point(center.getX() - 25, buttonsY - 10)
+        self.winkbutton_p2 = Point(center.getX() + 25, buttonsY + 10)
+        Rectangle(self.winkbutton_p1, self.winkbutton_p2).draw(window)
+
+        # Display Frown button
+        self.frownbutton_p1 = Point(center.getX() + 75, buttonsY - 10)
+        self.frownbutton_p2 = Point(center.getX() + 125, buttonsY + 10)
+        Rectangle(self.frownbutton_p1, self.frownbutton_p2).draw(window)
+
+    def smile(self, win):
+        p1 = self.mouth.getP1()
+        p2 = self.mouth.getP2()
+        p3 = Point(p1.getX() - 10, p1.getY() - 10)
+        p4 = Point(p2.getX() + 10, p2.getY() - 10)
+        Line(p3,p1).draw(win)
+        Line(p2,p4).draw(win)
+
+    def wink(self, win):
+        self.leftEye.undraw()
+        lefteyeX = self.leftEye.getCenter().getX()
+        lefteyeY = self.leftEye.getCenter().getY()
+        p1 = Point(lefteyeX, lefteyeY - 10)
+        p2 = Point(lefteyeX + 10, lefteyeY)
+        p3 = Point(lefteyeX, lefteyeY + 10)
+        Line(p1,p2).draw(win)
+        Line(p2,p3).draw(win)
+
+    def frown(self, win):
+        p1 = self.mouth.getP1()
+        p2 = self.mouth.getP2()
+        p3 = Point(p1.getX() - 10, p1.getY() + 10)
+        p4 = Point(p2.getX() + 10, p2.getY() + 10)
+        Line(p3,p1).draw(win)
+        Line(p2,p4).draw(win)
+        
+    def buttonclicked(self, p):
+        if (self.smilebutton_p1.getX() <= p.getX() <= self.smilebutton_p2.getX()) and (self.smilebutton_p1.getY() <= p.getY() <= self.smilebutton_p2.getY()):
+            return "smile"
+        elif (self.winkbutton_p1.getX() <= p.getX() <= self.winkbutton_p2.getX()) and (self.winkbutton_p1.getY() <= p.getY() <= self.winkbutton_p2.getY()):
+            return "wink"
+        elif (self.frownbutton_p1.getX() <= p.getX() <= self.frownbutton_p2.getX()) and (self.frownbutton_p1.getY() <= p.getY() <= self.frownbutton_p2.getY()):
+            return "frown"
+
+
+def main():
+    win = GraphWin("Face", 300, 300)
+    face = Face(win, Point(150,150), 50)
+    mode = face.buttonclicked(win.getMouse())
+    if mode == "smile":
+        face.smile(win)
+    elif mode == "wink":
+        face.wink(win)
+    elif mode == "frown":
+        face.frown(win)
+
+    # close window
+    win.getMouse()
+    win.close()
+
+
+if __name__ == "__main__":
+    main()
+```
+> The program only processes one button click. To change expressions again, you'd need to restart
+
+---
+
+# **Question 14**
+**Code**:
+```python
 <code>
 ```
