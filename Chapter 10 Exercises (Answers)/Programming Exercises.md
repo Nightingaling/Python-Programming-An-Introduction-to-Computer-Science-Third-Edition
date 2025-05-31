@@ -729,7 +729,7 @@ if __name__ == "__main__":
 ---
 
 # **Question 13**
-**Code**:
+**Modified Code**:
 ```python
 # face.py
 from graphics import *
@@ -840,7 +840,105 @@ if __name__ == "__main__":
 ---
 
 # **Question 14**
-**Code**:
+**Modified Code**:
+```python
+# face.py
+from graphics import *
+
+class Face:
+    
+    def __init__(self, window, center, size):
+        self.eyeSize = 0.15 * size 
+        eyeOff = size / 3.0
+        mouthSize = 0.8 * size
+        mouthOff = size / 2.0
+        self.head = Circle(center,size)
+        self.head.draw(window) 
+        self.leftEye = Circle(center, self.eyeSize) 
+        self.leftEye.move(-eyeOff, -eyeOff) 
+        self.rightEye = Circle(center, self.eyeSize) 
+        self.rightEye.move(eyeOff, -eyeOff) 
+        self.leftEye.draw(window) 
+        self.rightEye.draw(window) 
+        p1 = center.clone() 
+        p1.move(-mouthSize/2, mouthOff) 
+        p2 = center.clone() 
+        p2.move(mouthSize/2, mouthOff)
+        self.mouth = Line(p1,p2)
+        self.mouth.draw(window)
+        self.centerP_mouth = self.mouth.getCenter()
+        self.centerP_eye = self.leftEye.getCenter()
+
+    def smile(self, win):
+        self.mouth.undraw()
+        p1 = self.centerP_mouth
+        p2 = Point(p1.getX() - 20, p1.getY() - 20)
+        p3 = Point(self.centerP_mouth.getX(), self.centerP_mouth.getY() + 10)
+        p4 = Point(p1.getX() + 20, p1.getY() - 20)
+        self.mouth = Polygon(p1,p2,p3,p4).draw(win)
+
+    def wink(self, win):
+        self.leftEye.undraw()
+        self.mouth.undraw()
+        self.smile(win)
+        lefteyeX = self.centerP_eye.getX()
+        lefteyeY = self.centerP_eye.getY()
+        p1 = Point(lefteyeX, lefteyeY)
+        p2 = Point(lefteyeX - 10, lefteyeY - 10) 
+        p3 = Point(lefteyeX + 10, lefteyeY)
+        p4 = Point(lefteyeX - 10, lefteyeY + 10)
+        self.leftEye = Polygon(p1,p2,p3,p4).draw(win)
+
+    def frown(self, win):
+        self.mouth.undraw()
+        self.leftEye.undraw()
+        self.leftEye = Circle(self.centerP_eye, self.eyeSize).draw(win)
+        p1 = self.centerP_mouth
+        p2 = Point(p1.getX() + 20, p1.getY() + 10)
+        p3 = Point(self.centerP_mouth.getX(), self.centerP_mouth.getY() - 10)
+        p4 = Point(p1.getX() - 20, p1.getY() + 10)
+        self.mouth = Polygon(p1,p2,p3,p4).draw(win)
+
+    def move(self, win, center, size):
+        dx = dy = 1
+        expressions = [self.smile, self.wink, self.frown]
+        expr_index = 0
+        while True:
+            if win.checkMouse(): break
+            current = self.head.getCenter()
+            if current.getY() - size <= 0 or current.getY() + size >= 300:
+                dy = -dy
+                expressions[expr_index](win)
+                expr_index = (expr_index + 1) % 3
+            if current.getX() - size <= 0 or current.getX() + size >= 300:
+                dx = -dx
+                expressions[expr_index](win)
+                expr_index = (expr_index + 1) % 3
+            self.head.move(dx,dy)
+            self.leftEye.move(dx,dy)
+            self.rightEye.move(dx,dy)
+            self.mouth.move(dx,dy)
+            self.centerP_mouth.move(dx,dy)
+            self.centerP_eye.move(dx,dy)
+            update(30)
+
+
+def main():
+    win = GraphWin("Face Animation", 300, 300)
+    face = Face(win, Point(75,100), 50)
+    face.move(win, Point(75,100), 50)
+    win.close()
+
+
+if __name__ == "__main__":
+    main()
+```
+> The order of change of facial expression is smile, wink then lastly frown. However, if you change the position of the center of the face, where it causes the face to have corner bounces (hitting two walls simultaneously). Then, the order will not be the same, as local variable "expr_index" will + 2 instead of +1. Thus, the order will skip the next one and will execute the subsequent facial expression. e.g. neutral, wink, smile, frown, wink...
+
+---
+
+# **Question 15**
+**Modified Code**:
 ```python
 <code>
 ```
