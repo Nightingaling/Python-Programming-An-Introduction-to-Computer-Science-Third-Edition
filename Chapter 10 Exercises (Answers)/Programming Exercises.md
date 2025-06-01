@@ -940,5 +940,513 @@ if __name__ == "__main__":
 # **Question 15**
 **Modified Code**:
 ```python
-<code>
+#file: animation.py
+
+from graphics import *
+from math import sin, cos, radians
+
+class Button:
+
+    """A button is a labeled rectangle in a window.
+    It is activated or deactivated with the activate()
+    and deactivate() methods. The clicked(p) method
+    returns True if the button is active and p is inside it."""
+
+    def __init__(self, win, center, width, height, label):
+        """Creates a rectagular button, eg:
+        qb = Button(myWin, centerPoint, width, height, 'Quit')"""
+
+        w,h = width/2.0, height/2.0
+        x,y = center.getX(), center.getY()
+        self.xmax, self.xmin = x+w, x-w
+        self.ymax, self.ymin = y+h, y-h
+        p1 = Point(self.xmin, self.ymin) 
+        p2 = Point(self.xmax, self.ymax) 
+        self.rect = Rectangle(p1,p2) 
+        self.rect.setFill('lightgray') 
+        self.rect.draw(win) 
+        self.label = Text(center, label) 
+        self.label.draw(win) 
+        self.deactivate()
+
+    def clicked(self, p):
+        "Returns True if button active and p is inside"
+        return (self.active and
+                self.xmin <= p.getX() <= self.xmax and
+                self.ymin <= p.getY() <= self.ymax)
+
+    def getLabel(self):
+        "Returns the label string of this button."
+        return self.label.getText()
+
+    def activate(self):
+        "Sets this button to 'active'."
+        self.label.setFill('black')
+        self.rect.setWidth(2)
+        self.active = True
+
+    def deactivate(self):
+        "Sets this button to 'inactive'."
+        self.label.setFill('darkgrey')
+        self.rect.setWidth(1)
+        self.active = False
+
+
+class Projectile:
+    
+    """Simulates the flight of simple projectiles near the earth's 
+    surface, ignoring wind resistance. Tracking is done in two 
+    dimensions, height (y) and distance (x)."""
+    
+    def __init__(self, angle, velocity, height):
+        """Create a projectile with given launch angle, initial
+        velocity and height."""
+        self.xpos = 0.0
+        self.ypos = height
+        theta = radians(angle)
+        self.xvel = velocity * cos(theta)
+        self.yvel = velocity * sin(theta)
+
+    def update(self, time):
+        """Update the state of this projectile to move it time seconds
+        farther into its flight""" 
+        self.xpos = self.xpos + time * self.xvel 
+        yvel1 = self.yvel - 9.8 * time 
+        self.ypos = self.ypos + time * (self.yvel + yvel1) / 2.0 
+        self.yvel = yvel1
+
+    def getY(self):
+        "Returns the y position (height) of this projectile."
+        return self.ypos
+
+    def getX(self):
+        "Returns the x position (distance) of this projectile."
+        return self.xpos
+
+
+class ShotTracker:
+
+    def __init__(self, win, angle, velocity, height):
+        """win is teh GraphWin to display the shot, angle, velocity,
+           and height are initial projectile parameters.
+        """
+
+        self.proj = Projectile(angle, velocity, height)
+        self.marker = Circle(Point(0,height), 3)
+        self.marker.setFill("red")
+        self.marker.setOutline("red")
+        self.marker.draw(win)
+
+    def update(self, dt):
+        """ Move the shot dt seconds farther along its flight """
+
+        # update the projectile
+        self.proj.update(dt)
+
+        # move the circle to the new projectile location
+        center = self.marker.getCenter()
+        dx = self.proj.getX() - center.getX()
+        dy = self.proj.getY() - center.getY()
+        self.marker.move(dx,dy)
+
+    def getX(self):
+        """ return the current x coordinate of the shot's center """
+        return self.proj.getX()
+
+    def getY(self):
+        """ return the current y coordinate of the shot's center """
+        return self.proj.getY()
+
+    def undraw(self):
+        """ undraw the shot """
+        self.marker.undraw()
+
+
+class InputDialog:
+
+    """ A custom window for getting simulation values (angle, velocity,
+    and height) from the user."""
+
+    def __init__(self, angle, vel, height):
+        """ Build and display the input window """
+
+        self.win = win = GraphWin("Initial Values", 200, 300)
+        win.setCoords(0,4.5,4,.5)
+
+        Text(Point(1,1), "Angle").draw(win)
+        self.angle = Entry(Point(3,1), 5).draw(win)
+        self.angle.setText(str(angle))
+
+        Text(Point(1,2), "Velocity").draw(win)
+        self.vel = Entry(Point(3,2), 5).draw(win)
+        self.vel.setText(str(vel))
+
+        Text(Point(1,3), "Height").draw(win)
+        self.height = Entry(Point(3,3), 5).draw(win)
+        self.height.setText(str(height))
+
+        self.fire = Button(win, Point(1,4), 1.25, .5, "Fire!")
+        self.fire.activate()
+
+        self.quit = Button(win, Point(3,4), 1.25, .5, "Quit")
+        self.quit.activate()
+
+    def interact(self):
+        """ wait for user to click Quit or Fire button
+        Returns a string indicating which button was clicked
+        """
+
+        while True:
+            pt = self.win.getMouse()
+            if self.quit.clicked(pt):
+                return "Quit"
+            if self.fire.clicked(pt):
+                return "Fire!"
+
+    def getValues(self):
+        """ return input values """
+        a = float(self.angle.getText())
+        v = float(self.vel.getText())
+        h = float(self.height.getText())
+        return a,v,h
+
+    def close(self):
+        """ close the input window """
+        self.win.close()
+
+
+def main():
+
+    # create animation window
+    win = GraphWin("Projectile Animation", 640, 480, autoflush=False)
+    win.setCoords(-10, -10, 210, 155)
+    Line(Point(-10,0), Point(210,0)).draw(win)
+    for x in range(0, 210, 50):
+        Text(Point(x,-5), str(x)).draw(win)
+        Line(Point(x,0), Point(x,2)).draw(win)
+    
+    #event loop, each time through fires a single shot
+    angle, vel, height = 45.0, 40.0, 2.0
+    inputwin = InputDialog(angle, vel, height)
+    while True:
+        # interact with the user
+        choice = inputwin.interact()
+
+        if choice == "Quit": # loop exit
+            inputwin.close()
+            break
+
+        # create a shot and track until it hits ground or leaves window
+        angle, vel, height = inputwin.getValues()
+        shot = ShotTracker(win, angle, vel, height)
+        while 0 <= shot.getY() and -10 < shot.getX() <= 210:
+            shot.update(1/50)
+            update(50)
+
+    win.close()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# **Question 16**
+**Modified Code**:
+```python
+#file: animation.py
+
+from graphics import *
+from math import sin, cos, radians
+from random import randrange
+
+class Button:
+
+    """A button is a labeled rectangle in a window.
+    It is activated or deactivated with the activate()
+    and deactivate() methods. The clicked(p) method
+    returns True if the button is active and p is inside it."""
+
+    def __init__(self, win, center, width, height, label):
+        """Creates a rectagular button, eg:
+        qb = Button(myWin, centerPoint, width, height, 'Quit')"""
+
+        w,h = width/2.0, height/2.0
+        x,y = center.getX(), center.getY()
+        self.xmax, self.xmin = x+w, x-w
+        self.ymax, self.ymin = y+h, y-h
+        p1 = Point(self.xmin, self.ymin) 
+        p2 = Point(self.xmax, self.ymax) 
+        self.rect = Rectangle(p1,p2) 
+        self.rect.setFill('lightgray') 
+        self.rect.draw(win) 
+        self.label = Text(center, label) 
+        self.label.draw(win) 
+        self.deactivate()
+
+    def clicked(self, p):
+        "Returns True if button active and p is inside"
+        return (self.active and
+                self.xmin <= p.getX() <= self.xmax and
+                self.ymin <= p.getY() <= self.ymax)
+
+    def getLabel(self):
+        "Returns the label string of this button."
+        return self.label.getText()
+
+    def activate(self):
+        "Sets this button to 'active'."
+        self.label.setFill('black')
+        self.rect.setWidth(2)
+        self.active = True
+
+    def deactivate(self):
+        "Sets this button to 'inactive'."
+        self.label.setFill('darkgrey')
+        self.rect.setWidth(1)
+        self.active = False
+
+
+class Projectile:
+    
+    """Simulates the flight of simple projectiles near the earth's 
+    surface, ignoring wind resistance. Tracking is done in two 
+    dimensions, height (y) and distance (x)."""
+    
+    def __init__(self, angle, velocity, height):
+        """Create a projectile with given launch angle, initial
+        velocity and height."""
+        self.xpos = 0.0
+        self.ypos = height
+        theta = radians(angle)
+        self.xvel = velocity * cos(theta)
+        self.yvel = velocity * sin(theta)
+
+    def update(self, time):
+        """Update the state of this projectile to move it time seconds
+        farther into its flight""" 
+        self.xpos = self.xpos + time * self.xvel 
+        yvel1 = self.yvel - 9.8 * time 
+        self.ypos = self.ypos + time * (self.yvel + yvel1) / 2.0 
+        self.yvel = yvel1
+
+    def getY(self):
+        "Returns the y position (height) of this projectile."
+        return self.ypos
+
+    def getX(self):
+        "Returns the x position (distance) of this projectile."
+        return self.xpos
+
+
+class ShotTracker:
+
+    def __init__(self, win, angle, velocity, height):
+        """win is teh GraphWin to display the shot, angle, velocity,
+           and height are initial projectile parameters.
+        """
+
+        self.proj = Projectile(angle, velocity, height)
+        self.marker = Circle(Point(0,height), 3)
+        self.marker.setFill("red")
+        self.marker.setOutline("red")
+        self.marker.draw(win)
+
+    def update(self, dt):
+        """ Move the shot dt seconds farther along its flight """
+
+        # update the projectile
+        self.proj.update(dt)
+
+        # move the circle to the new projectile location
+        center = self.marker.getCenter()
+        dx = self.proj.getX() - center.getX()
+        dy = self.proj.getY() - center.getY()
+        self.marker.move(dx,dy)
+
+    def getX(self):
+        """ return the current x coordinate of the shot's center """
+        return self.proj.getX()
+
+    def getY(self):
+        """ return the current y coordinate of the shot's center """
+        return self.proj.getY()
+
+    def undraw(self):
+        """ undraw the shot """
+        self.marker.undraw()
+
+
+class InputDialog:
+
+    """ A custom window for getting simulation values (angle, velocity,
+    and height) from the user."""
+
+    def __init__(self, angle, vel, height):
+        """ Build and display the input window """
+
+        self.win = win = GraphWin("Initial Values", 200, 300)
+        win.setCoords(0,4.5,4,.5)
+
+        Text(Point(1,1), "Angle").draw(win)
+        self.angle = Entry(Point(3,1), 5).draw(win)
+        self.angle.setText(str(angle))
+
+        Text(Point(1,2), "Velocity").draw(win)
+        self.vel = Entry(Point(3,2), 5).draw(win)
+        self.vel.setText(str(vel))
+
+        Text(Point(1,3), "Height").draw(win)
+        self.height = Entry(Point(3,3), 5).draw(win)
+        self.height.setText(str(height))
+
+        self.fire = Button(win, Point(2,4), 1.25, .5, "Fire!")
+        self.fire.activate()
+
+    def interact(self):
+        """ wait for user to click Quit or Fire button
+        Returns a string indicating which button was clicked
+        """
+
+        while True:
+            pt = self.win.getMouse()
+            if self.fire.clicked(pt):
+                return "Fire!"
+
+    def getValues(self):
+        """ return input values """
+        a = float(self.angle.getText())
+        v = float(self.vel.getText())
+        h = float(self.height.getText())
+        return a,v,h
+
+    def close(self):
+        """ close the input window """
+        self.win.close()   
+
+
+class Target:
+
+    def __init__(self, win):
+        self.x = randrange(5,206) #center of target
+        self.y = 0
+        Rectangle(Point(self.x-5, self.y+5), Point(self.x+5, self.y)).draw(win)
+
+    def getHit(self, shot):
+        return (self.x-8 <= shot.getX() <= self.x+8 and 0 <= shot.getY() <= 8)
+
+
+def main():
+
+    # create animation window
+    win = GraphWin("Projectile Animation", 640, 480, autoflush=False)
+    win.setCoords(-10, -10, 210, 155) #bottom left to top right
+    Line(Point(-10,0), Point(210,0)).draw(win)
+    for x in range(0, 210, 50):
+        Text(Point(x,-5), str(x)).draw(win)
+        Line(Point(x,0), Point(x,2)).draw(win)
+    target = Target(win)
+    
+    #event loop, each time through fires a single shot
+    angle, vel, height = 35.0, 40.0, 2.0
+    inputwin = InputDialog(angle, vel, height)
+    while True:
+        # interact with the user
+        inputwin.interact()
+
+        # create a shot and track until it hits ground or leaves window
+        angle, vel, height = inputwin.getValues()
+        shot = ShotTracker(win, angle, vel, height)
+        hit = False
+        while 0 <= shot.getY() and -10 < shot.getX() <= 210:
+            shot.update(1/50)
+            update(50)
+            
+            # shot hit the target
+            if target.getHit(shot):
+                hit = True
+                break
+
+        if hit:
+            Text(Point(110, 110), "You hit the target! Click anywhere to quit.").draw(win)
+            win.getMouse()
+            inputwin.close()
+            break
+
+    win.close()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+# **Question 17**
+**Modified Code**:
+```python
+from graphics import *
+
+class Regression:
+
+    def __init__(self):
+        self.sum_x = 0.0
+        self.sum_y = 0.0
+        self.sum_x2 = 0.0
+        self.sum_xy = 0.0
+        self.n = 0
+
+    def addPoint(self, pt):
+        x = pt.getX()
+        y = pt.getY()
+        self.sum_x = self.sum_x + x
+        self.sum_y = self.sum_y + y
+        self.sum_x2 = self.sum_x2 + x**2
+        self.sum_xy = self.sum_xy + x * y
+        self.n = self.n + 1
+        return x,y
+
+    def predict(self, x):
+        x_mean = self.sum_x / self.n
+        y_mean = self.sum_y / self.n
+        denominator = self.sum_x2 - self.n * (x_mean ** 2)
+        if denominator == 0:
+            return None
+        else:
+            m = (self.sum_xy - self.n * x_mean * y_mean) / denominator
+            return (y_mean + m * (x - x_mean))
+
+    def getClicked(self):
+        return self.n
+
+
+def main():
+    win = GraphWin('Regression Line', 300, 300)
+    win.setCoords(0, 0, 300, 300)
+    Rectangle(Point(0, 0), Point(50, 50)).draw(win)
+    Text(Point(25, 25), 'Done').draw(win)
+    regression = Regression()
+    while True:
+        pt = win.getMouse()
+        if 0 <= pt.getX() <= 50 and 0 <= pt.getY() <= 50:
+            if regression.getClicked() < 2:
+                print("At least 2 points are required. Continue clicking.")
+            else:
+                break
+        else:
+            x,y = regression.addPoint(pt)
+            Point(x, y).draw(win)
+    left_y = regression.predict(0)
+    right_y = regression.predict(300)
+    if left_y == None:
+        print("All x-values are identical. Cannot compute slope.")
+    else:
+        Line(Point(0, left_y), Point(300, right_y)).draw(win)
+    win.getMouse()
+    win.close()
+
+
+if __name__ == "__main__":
+    main()
 ```
