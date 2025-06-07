@@ -258,7 +258,188 @@ def sort(myList):
 ---
 
 # **Question 6**
+**Code**:
+```python
+from random import randrange
+
+def shuffle(myList):
+    # Create a copy to avoid modifying the original list
+    shuffled = myList[:]  
+    n = len(shuffled)
+    for i in range(n - 1, 0, -1):  # Start from the last element
+        j = randrange(0, i + 1)   # Random index between 0 and i
+        shuffled[i], shuffled[j] = shuffled[j], shuffled[i]  # Swap
+    return shuffled
+```
+
+---
+
+# **Question 7**
+**Code**:
+```python
+def innerProd(x,y):
+    total = 0
+    for i in range(len(x)):
+        total = total + (x[i] * y[i])
+    return total
+```
+
+---
+
+# **Question 8**
+**Code**:
+```python
+def removeDuplicates(somelist):
+    noduplicate = []
+    for i in somelist:
+        if i not in noduplicate:
+            noduplicate.append(i)
+    return noduplicate
+```
+
+---
+
+# **Question 9**
+**Modified Code**:    
+gpasort.py
+```python
+from gpa import Student, makeStudent
+
+def readStudents(filename):
+    infile = open(filename, 'r')
+    students = []
+    for line in infile:
+        students.append(makeStudent(line))
+    infile.close()
+    return students
+
+def writeStudents(students, filename):
+    outfile = open(filename, 'w')
+    for n in students:
+        s = n[1]
+        print("{0}\t{1}\t{2}".format(s.getName(), s.getHours(), s.getQPoints()),file=outfile)
+    outfile.close()
+
+def main():
+    print("This program sorts student grade information by GPA")
+    filename = input("Enter the name of the data file: ")
+    data = readStudents(filename)
+    # Bubble sort
+    for j in range(len(data) - 1):
+        for i in range(len(data) - 1 - j):
+            if data[i][0] > data[i+1][0]:
+                data[i], data[i+1] = data[i+1], data[i]
+    filename = input("Enter a name for the output file: ")
+    writeStudents(data, filename)
+    print("The data has been written to", filename)
+
+if __name__ == '__main__':
+    main()
+```
+
+gpa.py
+```python
+
+#   Program to find student with highest GPA
+
+class Student:
+    def __init__(self, name, hours, qpoints):
+        self.name = name
+        self.hours = float(hours)
+        self.qpoints = float(qpoints)
+    
+    def getName(self): 
+        return self.name
+    
+    def getHours(self): 
+        return self.hours
+    
+    def getQPoints(self): 
+        return self.qpoints
+    
+    def gpa(self):
+        return self.qpoints / self.hours
+
+def makeStudent(infoStr):
+    # infoStr is a tab-separated line: name hours qpoints
+    # returns a corresponding Student object
+    name, hours, qpoints = infoStr.split("\t")
+    return (int(qpoints)/int(hours), Student(name, hours, qpoints))
+
+def main():
+    # open the input file for reading
+    filename = input("Enter the name of the grade file: ")
+    infile = open(filename, 'r')
+
+    # set best to the record for the first student in the file
+    best = makeStudent(infile.readline())
+
+    # process subsequent lines of the file
+    for line in infile:
+        # turn the line into a student record
+        s = makeStudent(line)
+        # if this student is best so far, remember it.
+        if s.gpa() > best.gpa():
+            best = s
+    infile.close()
+
+    # print information about the best student
+    print("The best student is:", best.getName())
+    print("hours:", best.getHours())
+    print("GPA:", best.gpa())
+
+if __name__ == '__main__':
+    main()
+```        
+
+---
+
+# **Question 10**
+**Code**:
+```python
+n = int(input('Primes up to: '))
+list = []
+prime_numbers = []
+for i in range(2, n+1):
+    list.append(i)
+while list != []:
+    prime = list.pop(0)
+    prime_numbers.append(prime)
+    for i in list:
+        if i % prime == 0:
+            list.remove(i)
+print('The prime numbers up to {0} are: {1}'.format(n, prime_numbers))
+```        
+
+---
+
+# **Question 11**
+**Code**:
+```python
+filename = input('Enter the name of the data file: ')
+outfilename = input('Enter the name for the output file: ')
+outfile = open(outfilename, 'w')
+infile = open(filename, 'r')
+for line in infile:
+    print(line)
+    words = line.split()
+    processed_words = []
+    for word in words:
+        if len(word) == 4:
+            processed_words.append("****")
+        else:
+            processed_words.append(word)
+    line = " ".join(processed_words)
+    print(line, file=outfile)
+infile.close()
+outfile.close()
+```        
+> The question specifically mentioned 'You can ignore punctuation'. Thus, in the input file, there must not have any punctuation. If the input file has punctuations, any word with 4 letters with the punctuation will count as a 5 letter word, causing contradiction with the question.
+
+---
+
+# **Question 12**
 **Modified Code**:
 ```python
 <code>
-```
+``` 
