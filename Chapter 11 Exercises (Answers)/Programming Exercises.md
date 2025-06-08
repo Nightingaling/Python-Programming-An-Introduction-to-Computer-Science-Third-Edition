@@ -421,7 +421,6 @@ outfilename = input('Enter the name for the output file: ')
 outfile = open(outfilename, 'w')
 infile = open(filename, 'r')
 for line in infile:
-    print(line)
     words = line.split()
     processed_words = []
     for word in words:
@@ -441,5 +440,391 @@ outfile.close()
 # **Question 12**
 **Modified Code**:
 ```python
-<code>
+filename = input('Enter the name of the data file: ')
+censoredfilename = input('Enter the name of the file for the censored words: ')
+outfilename = input('Enter the name for the output file: ')
+infile = open(filename, 'r')
+censored = open(censoredfilename, 'r')
+outfile = open(outfilename, 'w')
+cwords_list = []
+for cword in censored.readlines():
+    cwords_list.append(cword.rstrip())
+censored.close()
+for line in infile:
+    words = line.split()
+    processed_words = []
+    for word in words:
+        if(word.lower() in cwords_list):
+            processed_words.append("*" * len(word))
+        else:
+            processed_words.append(word)
+    line = " ".join(processed_words)
+    print(line, file=outfile)
+infile.close()
+outfile.close()
 ``` 
+
+---
+
+# **Question 13**
+**Code**:
+```python
+class Card:
+
+    def __init__(self, rank, suit):
+        self.suit = suit
+        self.rank = rank
+
+    def getRank(self):
+        return self.rank
+
+    def getSuit(self):
+        return self.suit
+
+    def __str__(self):
+        if self.rank == 1:
+            self.display_rank = 'Ace'
+        elif self.rank == 11:
+            self.display_rank = 'Jack'
+        elif self.rank == 12:
+            self.display_rank = 'Queen'
+        elif self.rank == 13:
+            self.display_rank = 'King'
+        else:
+            self.display_rank = self.rank
+        return ('{0} of {1}'.format(self.display_rank, self.suit))
+
+
+def main():
+    # read list of cards from a file
+    infile = open('cards.txt', 'r')
+    deck = []
+    for card in infile.readlines():
+        rank, suit = card.split()
+        deck.append(Card(int(rank),suit))
+    deck.sort(key=Card.getRank)
+    deck.sort(key=Card.getSuit)
+    for card in deck:
+        print(card)
+    infile.close()
+
+
+if __name__ == "__main__":
+    main()
+``` 
+
+---
+
+# **Question 14**
+**Modified Code**:
+```python
+class Card:
+
+    def __init__(self, rank, suit):
+        self.suit = suit
+        self.rank = rank
+
+    def getRank(self):
+        return self.rank
+
+    def getSuit(self):
+        return self.suit
+
+    def __str__(self):
+        if self.rank == 1:
+            self.display_rank = 'Ace'
+        elif self.rank == 11:
+            self.display_rank = 'Jack'
+        elif self.rank == 12:
+            self.display_rank = 'Queen'
+        elif self.rank == 13:
+            self.display_rank = 'King'
+        else:
+            self.display_rank = self.rank
+        return('{0} of {1}'.format(self.display_rank, self.suit))
+
+    def XHigh(self, num, ace):
+        if num == 11:
+            self.rank = 'Jack'
+        elif num == 12:
+            self.rank = 'Queen'
+        elif num == 13:
+            self.rank = 'King'
+        else:
+            self.rank = num
+        if ace:
+            print('The hand is Ace high')
+        else:
+            print('The hand is {0} high'.format(self.rank))
+
+
+def main():
+    # read list of cards from a file
+    infile = open('cards.txt', 'r')
+    hand = []
+    handranks = []
+    handsuits = []
+    ace = False
+    for card in infile.readlines():
+        rank, suit = card.split()
+        if int(rank) == 1:
+            ace = True
+        handranks.append(int(rank))
+        handsuits.append(suit)
+        hand.append(Card(int(rank),suit))
+        if len(hand) == 5:
+            break
+    hand.sort(key=Card.getRank)
+    hand.sort(key=Card.getSuit)
+    handranks.sort()
+    for card in hand:
+        print(card)
+    infile.close()
+    suitscount = handsuits.count(handsuits[0])
+    rankscount = handranks.count(handranks[1])
+    rankscount_1 = handranks.count(handranks[3])
+    # using middle to count for Three of a kind
+    rankscount_2 = handranks.count(handranks[2])
+    ranks_in_a_row = 0
+    for i in range(len(handranks) - 1):
+        if (handranks[i] + 1) != handranks[i+1]:
+            break
+        else:
+            ranks_in_a_row = ranks_in_a_row + 1
+    if handranks == [1,10,11,12,13] and suitscount == 5:
+        print('Your hand is a Royal Flush')
+    elif suitscount == 5:
+        if ranks_in_a_row == 4:
+            print('Your hand is a Straight Flush')
+        else:
+            print('Your hand is a Flush')
+    elif rankscount == 4:
+        print('Your hand is a Four of a Kind')
+    elif (rankscount == 3 and rankscount_1 == 2) or (rankscount == 2 and rankscount_1 == 3):
+        print('Your hand is a Full House')
+    elif (ranks_in_a_row == 4) or (handranks == [1,10,11,12,13]):
+        print('Your hand is a Straight')
+    #[1,1,1,2,3] or [1,2,2,2,3] or [1,2,3,3,3]
+    elif rankscount_2 == 3:
+        print('Your hand is a Three of a kind')
+    #[1,1,2,2,3] or [1,2,2,3,3] or [1,1,2,3,3]
+    elif (rankscount == 2) and (rankscount_1 == 2):
+        print('Your hand is a Two pair')
+    #[1,1,2,3,4] or [1,2,2,3,4] or [1,2,3,3,4] or [1,2,3,4,4]
+    elif (rankscount == 2) or (rankscount_1 == 2):
+        print('Your hand is a Pair')
+    else:
+        card.XHigh(handranks[-1], ace)
+
+
+if __name__ == "__main__":
+    main()
+``` 
+
+---
+
+# **Question 15**
+**Code**:
+```python
+from random import randrange
+
+class Deck:
+
+    def __init__(self):
+        self.deck = []
+        for i in ['Diamonds', 'Clubs', 'Hearts', 'Spades']:
+            self.deck.append(['Ace', i])
+            for j in range(2, 11):
+                self.deck.append([j, i])
+            self.deck.append(['Jack', i])
+            self.deck.append(['Queen', i])
+            self.deck.append(['King', i])
+
+    def shuffle(self):
+        for i in range(len(self.deck) - 1, -1, -1):
+            j = randrange(0, i + 1)
+            self.deck[i], self.deck[j] = self.deck[j], self.deck[i]
+            
+    def dealCard(self):
+        return self.deck.pop(0)
+    
+    def cardsLeft(self):
+        return len(self.deck)
+
+
+def main():
+    k = int(input('Enter number of cards to deal: '))
+    deck = Deck()
+    deck.shuffle()
+    n = 0
+    lose = 0
+    while deck.cardsLeft() >= k:
+        hand = []
+        n = n + 1
+        for i in range(k):
+            hand.append(deck.dealCard())
+        print(hand)
+        total = 0
+        hasAce = False
+        for i in hand:
+            if i[0] == "Ace" and (not hasAce):
+                total = total + 11
+                hasAce = True
+            elif str(i[0]) in 'Jack Queen King':
+                total = total + 10
+            elif i[0] == 'Ace' and hasAce:
+                total = total + 1
+            else:
+                total = total + i[0]
+        while True:
+            if deck.cardsLeft() == 0:
+                break
+            if 17 <= total <= 21:
+                break
+            elif total > 21:
+                lose = lose + 1
+                break
+            else:
+                draw = deck.dealCard()
+                if draw[0] == "Ace" and hasAce:
+                    total = total + 1
+                elif str(draw[0]) in 'Jack Queen King':
+                    total = total + 10
+                elif draw[0] == "Ace":
+                    total = total + 11
+                    hasAce = True
+                    if total > 21:
+                        total = total - 10
+                else:
+                    total = total + draw[0]
+    print('The probability that the dealer will bust is: {0:0.2f}'.format(lose/n))
+
+
+if __name__ == '__main__':
+    main()
+``` 
+
+---
+
+# **Question 16**
+**Code**:
+```python
+from math import sqrt
+
+class StatSet:
+
+    def __init__(self):
+        self.nums = []
+
+    def addNumber(self,x):
+        self.nums.append(x)
+
+    def mean(self):
+        total = 0.0
+        for num in self.nums:
+            total = total + num
+        return total / len(self.nums)
+
+    def median(self):
+        copy = self.nums
+        copy.sort()
+        size = len(copy)
+        midPos = size // 2
+        if size % 2 == 0:
+            med = (copy[midPos] + copy[midPos-1]) / 2.0
+        else:
+            med = copy[midPos]
+        return med
+
+    def stdDEV(self):
+        sumDevSq = 0.0
+        for num in self.nums:
+            dev = num - self.mean()
+            sumDevSq = sumDevSq + dev * dev
+        return sqrt(sumDevSq / (len(self.nums) - 1))
+
+    def count(self):
+        return len(self.nums)
+
+    def min(self):
+        smallest = self.nums[0]
+        for i in range(1, len(self.nums)):
+            if self.nums[i] < smallest:
+                smallest = self.nums[i]
+        return smallest
+
+    def max(self):
+        largest = self.nums[0]
+        for i in range(1, len(self.nums)):
+            if self.nums[i] > largest:
+                largest = self.nums[i]
+        return largest
+``` 
+
+---
+
+# **Question 17**
+**Code**:
+```python
+from graphics import *
+
+class GraphicsGroup:
+
+    def __init__(self, anchor):
+        self.group = []
+        # By using .clone() ensures the cloned point is move, but the orignial point remains
+        self.p = anchor.clone()
+
+    def getAnchor(self):
+        return self.p
+
+    def addObject(self, gObject):
+        self.group.append(gObject)
+
+    def move(self, dx, dy):
+        self.p.move(dx,dy)
+        for obj in self.group:
+            obj.move(dx,dy)
+
+    def draw(self, win):
+        for obj in self.group:
+            obj.draw(win)
+
+    def undraw(self):
+        for obj in self.group:
+            obj.undraw()
+``` 
+
+---
+
+# **Question 18**
+**Modified Code**:
+```python
+from random import randrange
+
+n = int(input("Length of sidewalk: "))
+position = (n // 2)
+sidewalk = [0] * n
+sidewalk[position] = sidewalk[position] + 1
+while True:
+    if randrange(0, 2) == 1:
+        position = position + 1
+        if position >= n:
+            break
+        sidewalk[position] = sidewalk[position] + 1
+    else:
+        position = position - 1
+        if position < 0:
+            break
+        sidewalk[position] = sidewalk[position] + 1
+for i in range(len(sidewalk)):
+    print('Square {0}: {1} steps'.format(i, sidewalk[i]))
+``` 
+
+---
+
+# **Question 19**
+**Code**:
+```python
+<code>
+```
