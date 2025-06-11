@@ -69,7 +69,7 @@ main()
 def main():
     print("Celsius | Fahrenheit")
     print("---------------------")
-    for celsius in range(0, 101, 10):
+    for celsius in [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]:
         fahrenheit = 9/5 * celsius + 32
         print(celsius, "°C |", fahrenheit, "°F")
     input("Press the <Enter> key to quit.")
@@ -86,8 +86,8 @@ main()
 def main():
     print("This program calculates the future value")
     principal = eval(input("Enter the initial principal: "))
-    apr = float(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
-    years = int(input("Enter the number of years: "))
+    apr = eval(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
+    years = eval(input("Enter the number of years: "))
     for i in range(years):
         principal = principal * (1 + apr)
     print("The value after", years, "years is: $", principal)
@@ -104,9 +104,9 @@ main()
 # A program to compute the value of an investment
 def main():
     print("This program calculates the total accumulation of yearly investments.")
-    yearly = float(input("Enter the amount to invest each year: $"))
-    rate = float(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
-    years = int(input("Enter the number of years: "))
+    yearly = eval(input("Enter the amount to invest each year: $"))
+    rate = eval(input("Enter the annual interest rate (e.g., 0.05 for 5%): "))
+    years = eval(input("Enter the number of years: "))
     total = 0
     for i in range(years):
         total = total + yearly
@@ -125,10 +125,10 @@ main()
 # A program to compute the value of an investment
 def main():
     print("This program calculates future value with compounded interest.")
-    principal = float(input("Enter the initial principal: $"))
-    rate = float(input("Enter the nominal yearly interest rate (e.g., 0.03 for 3%): "))
-    periods = int(input("Enter the number of compounding periods per year: "))
-    years = int(input("Enter the number of years: "))
+    principal = eval(input("Enter the initial principal: $"))
+    rate = eval(input("Enter the nominal yearly interest rate (e.g., 0.03 for 3%): "))
+    periods = eval(input("Enter the number of compounding periods per year: "))
+    years = eval(input("Enter the number of years: "))
     for i in range(years * periods):
         principal = principal * (1 + rate / periods)
     print("Total value after", years, "years: $", principal)
@@ -143,7 +143,7 @@ main()
 ```python
 def main():
     print("This program converts Fahrenheit to Celsius.")
-    f = float(input("Enter temperature in Fahrenheit: "))
+    f = eval(input("Enter temperature in Fahrenheit: "))
     c = 5/9 * (f - 32)
     print("Temperature in Celsius:", c)
     input("Press <Enter> to quit.")
@@ -157,7 +157,7 @@ main()
 ```python
 def main():
     print("This program converts kilometers to miles.")
-    km = float(input("Enter distance in kilometers: "))
+    km = eval(input("Enter distance in kilometers: "))
     miles = km * 0.62
     print("Distance in miles:", miles)
     input("Press <Enter> to quit.")
@@ -171,7 +171,7 @@ main()
 ```python
 def main():
     print("This program converts kilograms to pounds.")
-    kg = float(input("Enter weight in kilograms: "))
+    kg = eval(input("Enter weight in kilograms: "))
     pounds = kg * 2.20462
     print("Weight in pounds:", pounds)
     input("Press <Enter> to quit.")
@@ -186,7 +186,7 @@ main()
 def main():
     print("Interactive Python Calculator (Type expressions to evaluate)")
     for i in range(100):
-        expr = (input(">>> ")
+        expr = input(">>> ")
         print("Result:", eval(expr))
     input("Press <Enter> to exit.")
 main()
