@@ -186,8 +186,8 @@ main()
 def main():
     print("Interactive Python Calculator (Type expressions to evaluate)")
     for i in range(100):
-        expr = input(">>> ")
-        print("Result:", eval(expr))
-    input("Press <Enter> to exit.")
+        expr = eval(input(">>> "))
+        print("Result:", expr)
 main()
 ```
+> Only mathematical operations are allowed
