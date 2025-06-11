@@ -826,5 +826,498 @@ for i in range(len(sidewalk)):
 # **Question 19**
 **Code**:
 ```python
-<code>
+class Set:
+
+    def __init__(self, elements):
+        #Sets never contain duplicates. Elements is a list where there are duplicates
+        self.elements = []
+        for item in elements:
+            if item not in self.elements:
+                self.elements.append(item)
+
+    def __str__(self):
+        return "{" + ", ".join(str(i) for i in self.elements) + "}"
+
+    def addElement(self,x):
+        if x not in self.elements:
+            self.elements.append(x)
+
+    def deleteElement(self, x):
+        if x in self.elements:
+            del self.elements[self.elements.index(x)]
+
+    def member(self, x):
+        return x in self.elements
+
+    def intersection(self, set2):
+       return Set([i for i in set2.elements if i in self.elements])
+
+    def union(self, set2):
+        new_set = []
+        for i in self.elements:
+            if i not in new_set:
+                new_set.append(i)
+        for i in set2.elements:
+            if i not in new_set:
+                new_set.append(i)
+        return Set(new_set)
+
+    def subtract(self, set2):
+        return Set([i for i in self.elements if i not in set2.elements])
+``` 
+
+---
+
+# **Question 20**
+**Modified Code**:
+```python
+#file: animation.py
+
+from graphics import *
+from math import sin, cos, radians, degrees
+
+class Projectile:
+    
+    """Simulates the flight of simple projectiles near the earth's 
+    surface, ignoring wind resistance. Tracking is done in two 
+    dimensions, height (y) and distance (x)."""
+    
+    def __init__(self, angle, velocity, height):
+        """Create a projectile with given launch angle, initial
+        velocity and height."""
+        self.xpos = 0.0
+        self.ypos = height
+        theta = radians(angle)
+        self.xvel = velocity * cos(theta)
+        self.yvel = velocity * sin(theta)
+
+    def update(self, time):
+        """Update the state of this projectile to move it time seconds
+        farther into its flight""" 
+        self.xpos = self.xpos + time * self.xvel 
+        yvel1 = self.yvel - 9.8 * time 
+        self.ypos = self.ypos + time * (self.yvel + yvel1) / 2.0 
+        self.yvel = yvel1
+
+    def getY(self):
+        "Returns the y position (height) of this projectile."
+        return self.ypos
+
+    def getX(self):
+        "Returns the x position (distance) of this projectile."
+        return self.xpos
+
+
+class ShotTracker:
+
+    def __init__(self, win, angle, velocity, height):
+        """win is the GraphWin to display the shot, angle, velocity,
+           and height are initial projectile parameters.
+        """
+
+        self.proj = Projectile(angle, velocity, height)
+        self.marker = Circle(Point(0,height), 3)
+        self.marker.setFill("red")
+        self.marker.setOutline("red")
+        self.marker.draw(win)
+
+    def update(self, dt):
+        """ Move the shot dt seconds farther along its flight """
+
+        # update the projectile
+        self.proj.update(dt)
+
+        # move the circle to the new projectile location
+        center = self.marker.getCenter()
+        dx = self.proj.getX() - center.getX()
+        dy = self.proj.getY() - center.getY()
+        self.marker.move(dx,dy)
+
+    def getX(self):
+        """ return the current x coordinate of the shot's center """
+        return self.proj.getX()
+
+    def getY(self):
+        """ return the current y coordinate of the shot's center """
+        return self.proj.getY()
+
+    def undraw(self):
+        """ undraw the shot """
+        self.marker.undraw()
+
+
+class Launcher:
+
+    def __init__(self, win):
+        # draw the base shot of the launcher
+        self.base = Circle(Point(0,0), 3)
+        self.base.setFill("red")
+        self.base.setOutline("red")
+        self.base.draw(win)
+
+        # save the window and create initial angle and velocity
+        self.win = win
+        self.angle = radians(45.0)
+        self.vel = 40.0
+        self.height = 0
+
+        # create initial "dummy" arrow (needed by redraw)
+        self.arrow = Line(Point(0,0), Point(0,0)).draw(win)
+        # replace it with the correct arrow
+        self.redraw()
+    
+    def adjAngle(self, amt):
+        """Change launch angle by amt degrees"""
+
+        self.angle = self.angle + radians(amt)
+        self.redraw()
+
+    def adjVel(self, amt):
+        """change launch velocity by amt"""
+
+        self.vel = self.vel + amt
+        self.redraw()
+
+    def adjHeight(self, amt):
+        """change launch height by amt"""
+
+        self.height = self.height + amt
+        if self.height > 150 or 0 > self.height:
+            self.height = self.height - amt
+        else:
+            self.redraw()
+
+    def redraw(self):
+        """ redraw the arrow to show current angle and velocity"""
+
+        self.arrow.undraw()
+        self.base.undraw()
+        pt2 = Point(self.vel*cos(self.angle),
+                    self.vel*sin(self.angle) + self.height)
+        pt1 = Point(0, self.height)
+        self.arrow = Line(pt1, pt2).draw(self.win)
+        self.arrow.setArrow("last")
+        self.arrow.setWidth(3)
+        self.base = Circle(Point(0,self.height), 3)
+        self.base.setFill("red")
+        self.base.setOutline("red")
+        self.base.draw(self.win)
+
+    def fire(self):
+        return ShotTracker(self.win, degrees(self.angle), self.vel, self.height)
+
+
+class ProjectileApp:
+    
+    def __init__(self):
+        # create graphics window with a scale line at the bottom
+        self.win = GraphWin("Projectile Animation", 640, 480)
+        self.win.setCoords(-10, -10, 210, 155)
+        Line(Point(-10,0), Point(210,0)).draw(self.win)
+        for x in range(0, 210, 50):
+            Text(Point(x,-7), str(x)).draw(self.win)
+            Line(Point(x,0), Point(x,2)).draw(self.win)
+
+        # add the launcher to the window
+        self.launcher = Launcher(self.win)
+
+        # start with an empty list of "live" shots
+        self.shots = []
+
+    def run(self):
+        #main event/animation loop
+        while True:
+            self.updateShots(1/30)
+
+            key = self.win.checkKey()
+            if key in ["q", "Q"]:
+                break
+
+            if key == "Up":
+                self.launcher.adjAngle(5)
+            elif key == "Down":
+                self.launcher.adjAngle(-5)
+            elif key == "Right":
+                self.launcher.adjVel(5)
+            elif key == "Left":
+                self.launcher.adjVel(-5)
+            elif key in ["w", "W"]:
+                self.launcher.adjHeight(5)
+            elif key in ["s", "S"]:
+                self.launcher.adjHeight(-5)
+            elif key in ["f", "F"]:
+                self.shots.append(self.launcher.fire())
+
+            update(30)
+
+        self.win.close()
+
+    def updateShots(self, dt):
+        alive = []
+        for shot in self.shots:
+            shot.update(dt)
+            if shot.getY() >= 0 and -10 < shot.getX() < 210:
+                alive.append(shot)
+            else:
+                shot.undraw()
+        self.shots = alive
+
+
+if __name__ == "__main__":
+    ProjectileApp().run()
+``` 
+
+---
+
+# **Question 21**
+**Modified Code**:
+```python
+#file: animation.py
+
+from graphics import *
+from math import sin, cos, radians, degrees
+from random import randrange
+
+class Projectile:
+
+    """Simulates the flight of simple projectiles near the earth's 
+    surface, ignoring wind resistance. Tracking is done in two 
+    dimensions, height (y) and distance (x)."""
+
+    def __init__(self, angle, velocity, height):
+        """Create a projectile with given launch angle, initial
+        velocity and height."""
+        self.xpos = 0.0
+        self.ypos = height
+        theta = radians(angle)
+        self.xvel = velocity * cos(theta)
+        self.yvel = velocity * sin(theta)
+
+    def update(self, time):
+        """Update the state of this projectile to move it time seconds
+        farther into its flight""" 
+        self.xpos = self.xpos + time * self.xvel 
+        yvel1 = self.yvel - 9.8 * time 
+        self.ypos = self.ypos + time * (self.yvel + yvel1) / 2.0 
+        self.yvel = yvel1
+
+    def getY(self):
+        "Returns the y position (height) of this projectile."
+        return self.ypos
+
+    def getX(self):
+        "Returns the x position (distance) of this projectile."
+        return self.xpos
+
+
+class ShotTracker:
+
+    def __init__(self, win, angle, velocity, height):
+        """win is the GraphWin to display the shot, angle, velocity,
+           and height are initial projectile parameters.
+        """
+
+        self.proj = Projectile(angle, velocity, height)
+        self.marker = Circle(Point(0,height), 3)
+        self.marker.setFill("red")
+        self.marker.setOutline("red")
+        self.marker.draw(win)
+
+    def update(self, dt):
+        """ Move the shot dt seconds farther along its flight """
+
+        # update the projectile
+        self.proj.update(dt)
+
+        # move the circle to the new projectile location
+        center = self.marker.getCenter()
+        dx = self.proj.getX() - center.getX()
+        dy = self.proj.getY() - center.getY()
+        self.marker.move(dx,dy)
+
+    def getX(self):
+        """ return the current x coordinate of the shot's center """
+        return self.proj.getX()
+
+    def getY(self):
+        """ return the current y coordinate of the shot's center """
+        return self.proj.getY()
+
+    def undraw(self):
+        """ undraw the shot """
+        self.marker.undraw()
+
+
+class Launcher:
+
+    def __init__(self, win):
+        # draw the base shot of the launcher
+        self.base = Circle(Point(0,0), 3)
+        self.base.setFill("red")
+        self.base.setOutline("red")
+        self.base.draw(win)
+
+        # save the window and create initial angle and velocity
+        self.win = win
+        self.angle = radians(45.0)
+        self.vel = 40.0
+        self.height = 0
+
+        # create initial "dummy" arrow (needed by redraw)
+        self.arrow = Line(Point(0,0), Point(0,0)).draw(win)
+        # replace it with the correct arrow
+        self.redraw()
+
+    def adjAngle(self, amt):
+        """Change launch angle by amt degrees"""
+
+        self.angle = self.angle + radians(amt)
+        self.redraw()
+
+    def adjVel(self, amt):
+        """change launch velocity by amt"""
+
+        self.vel = self.vel + amt
+        self.redraw()
+
+    def adjHeight(self, amt):
+        """change launch height by amt"""
+
+        self.height = self.height + amt
+        if self.height > 150 or 0 > self.height:
+            self.height = self.height - amt
+        else:
+            self.redraw()
+
+    def redraw(self):
+        """ redraw the arrow to show current angle and velocity"""
+
+        self.arrow.undraw()
+        self.base.undraw()
+        pt2 = Point(self.vel*cos(self.angle),
+                    self.vel*sin(self.angle) + self.height)
+        pt1 = Point(0, self.height)
+        self.arrow = Line(pt1, pt2).draw(self.win)
+        self.arrow.setArrow("last")
+        self.arrow.setWidth(3)
+        self.base = Circle(Point(0,self.height), 3)
+        self.base.setFill("red")
+        self.base.setOutline("red")
+        self.base.draw(self.win)
+
+    def fire(self):
+        return ShotTracker(self.win, degrees(self.angle), self.vel, self.height)
+
+
+class Target:
+
+    def __init__(self, win):
+        self.dx = -1
+        self.win = win
+        self.length = randrange(5,25)
+        self.x = randrange(5,125) #center of target
+        self.y = 0
+        self.target = Rectangle(Point(self.x - self.length, self.y + 5), Point(self.x + self.length, self.y)).draw(self.win)
+
+    def getHit(self, shot):
+        if ((self.target.getCenter().getX() - self.length) <= shot.getX() <= (self.target.getCenter().getX() + self.length) and (0 <= shot.getY() <= 5)):
+            self.dx = -self.dx
+            self.redraw()
+            return True
+
+    def redraw(self):
+        self.target.undraw()
+        self.length = randrange(5,25)
+        self.x = randrange(50,125) #center of target
+        self.y = 0
+        self.target = Rectangle(Point(self.x - self.length, self.y + 5), Point(self.x + self.length, self.y)).draw(self.win)
+
+    def update(self):
+        #Why some wouldnt hit is because self.x is stationary and is not moving with the object
+        self.target.move(self.dx,0)
+        centerX = self.target.getCenter().getX()
+        if (centerX + self.length >= 210) or (centerX - self.length <= 0):
+            self.dx = -self.dx
+
+
+class Counter:
+
+    def __init__(self, win):
+        self.count = 0
+        Text(Point(90, 150), "Number of hits: ").draw(win)
+        self.counter = Text(Point(110, 150), self.count).draw(win)
+
+    def update(self):
+        self.count = self.count + 1
+        self.counter.setText(self.count)
+
+
+class ProjectileApp:
+    
+    def __init__(self):
+        # create graphics window with a scale line at the bottom
+        self.win = GraphWin("Projectile Animation", 640, 480)
+        self.win.setCoords(-10, -10, 210, 155)
+        Line(Point(-10,0), Point(210,0)).draw(self.win)
+        for x in range(0, 210, 50):
+            Text(Point(x,-7), str(x)).draw(self.win)
+            Line(Point(x,0), Point(x,2)).draw(self.win)
+
+        # add the launcher to the window
+        self.launcher = Launcher(self.win)
+
+        # add target to the window
+        self.target = Target(self.win)
+
+        #add counter to the window
+        self.count = Counter(self.win)
+
+        # start with an empty list of "live" shots
+        self.shots = []
+
+    def run(self):
+        #main event/animation loop
+        while True:
+            self.updateShots(1/30)
+            self.target.update()
+
+            key = self.win.checkKey()
+            if key in ["q", "Q"]:
+                break
+
+            if key == "Up":
+                self.launcher.adjAngle(5)
+            elif key == "Down":
+                self.launcher.adjAngle(-5)
+            elif key == "Right":
+                self.launcher.adjVel(5)
+            elif key == "Left":
+                self.launcher.adjVel(-5)
+            elif key in ["w", "W"]:
+                self.launcher.adjHeight(5)
+            elif key in ["s", "S"]:
+                self.launcher.adjHeight(-5)
+            elif key in ["f", "F"]:
+                self.shots.append(self.launcher.fire())
+
+            update(30)           
+
+        self.win.close()
+
+    def updateShots(self, dt):
+        alive = []
+        for shot in self.shots:
+            shot.update(dt)
+            if self.target.getHit(shot):
+                self.count.update()
+                shot.undraw()
+            elif shot.getY() >= 0 and -10 < shot.getX() < 210:
+                alive.append(shot)
+            else:
+                shot.undraw()
+        self.shots = alive
+
+
+if __name__ == "__main__":
+    ProjectileApp().run()
 ```
