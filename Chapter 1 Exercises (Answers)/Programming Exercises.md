@@ -1,19 +1,18 @@
 # **Question 1**  
-
 | **Command**                  | **Output**                     |  
 |------------------------------|--------------------------------|  
-| `print("Hello, world!")`      | `Hello, world!`                |  
-| `print("Hello", "world!")`    | `Hello world!`                 |  
-| `print(3)`                    | `3`                           |  
-| `print(3.0)`                  | `3.0`                         |  
-| `print(2 + 3)`                | `5`                           |  
-| `print(2.0 + 3.0)`            | `5.0`                         |  
-| `print("2" + "3")`            | `23`                          |  
-| `print("2 + 3 =", 2 + 3)`     | `2 + 3 = 5`                   |  
-| `print(2 * 3)`                | `6`                           |  
-| `print(2 ** 3)`               | `8`                           |  
-| `print(7 / 3)`                | `2.3333333333333335`          |  
-| `print(7 // 3)`               | `2`                           |  
+| `print("Hello, world!")`     | `Hello, world!`                |  
+| `print("Hello", "world!")`   | `Hello world!`                 |  
+| `print(3)`                   | `3`                            |  
+| `print(3.0)`                 | `3.0`                          |  
+| `print(2 + 3)`               | `5`                            |  
+| `print(2.0 + 3.0)`           | `5.0`                          |  
+| `print("2" + "3")`           | `23`                           |  
+| `print("2 + 3 =", 2 + 3)`    | `2 + 3 = 5`                    |  
+| `print(2 * 3)`               | `6`                            |  
+| `print(2 ** 3)`              | `8`                            |  
+| `print(7 / 3)`               | `2.3333333333333335`           |  
+| `print(7 // 3)`              | `2`                            |  
 
 ---
 
@@ -32,7 +31,7 @@ def main():
 main()
 ```
 
-**Sample Output for Input `0.5`**:  
+**Output for Input `0.5`**:  
 ```
 0.5
 0.975
@@ -63,7 +62,7 @@ def main():
 main()
 ```
 
-**Sample Output for Input `0.5`**:  
+**Output for Input `0.5`**:  
 ```
 0.5
 0.5
@@ -77,7 +76,7 @@ With the multiplier reduced to 2.0, the values quickly stabilize instead of exhi
 ---
 
 # **Question 4**  
-**Modified Loop**:  
+**Modified Code**:  
 ```python
 # File: chaos.py 
 # A simple program illustrating chaotic behavior.
@@ -94,7 +93,7 @@ main()
 ---
 
 # **Question 5**  
-**Modified Loop**:  
+**Modified Code**:  
 ```python
 # File: chaos.py 
 # A simple program illustrating chaotic behavior.
@@ -112,7 +111,7 @@ main()
 ---
 
 # **Question 6**  
-**Code for all versions**:  
+**Code**:  
 ```python
 # File: chaos.py 
 # A simple program illustrating chaotic behavior.
@@ -137,13 +136,10 @@ def main_c():
     for i in range(100):
         x = 3.9 * x - 3.9 * x * x
         print(x)
-
-# Run each version separately
-main_a()  # or main_b() / main_c()
 ```  
 
 **Results**:  
-- For initial values like \(x = 0.5\), all versions start identically.  
+- For initial values like (x = 0.5), all versions start identically.  
 - After ~20 iterations, slight differences emerge due to floating-point rounding errors.  
 - By iteration 50+, values diverge significantly (chaotic systems amplify tiny errors).  
 
@@ -153,7 +149,7 @@ Algebraically equivalent expressions can yield different computational results b
 ---
 
 # **Question 7**
-**Code**:  
+**Modified Code**:  
 ```python
 # File: chaos.py 
 # A simple program illustrating chaotic behavior.
@@ -169,13 +165,3 @@ def main():
         print(i+1, x1, x2)
 main()
 ```
-
-**Sample Output**:  
-```
-Iteration | Value 1 | Value 2
-----------------------------
-1 0.73125 0.7524
-2 0.76644140625 0.75497984
-3 0.6981353014384766 0.734342213554176
-...
-```  
