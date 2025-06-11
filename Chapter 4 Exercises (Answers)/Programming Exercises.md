@@ -4,23 +4,19 @@
 from graphics import *
 
 def main():
-    win = GraphWin("Squares", 500, 500)  # Larger window for visibility
+    win = GraphWin("Squares", 500, 500)
     
     # (a) & (b) Draw new red square at each click position
     for i in range(10):
         click_point = win.getMouse()
+        pt_x = click_point.getX()
+        pt_y = click_point.getY()
         # Create square centered at click with 40x40 size
-        square = Rectangle(
-            Point(click_point.getX() - 20, click_point.getY() - 20),
-            Point(click_point.getX() + 20, click_point.getY() + 20)
-        )
-        square.setOutline("red")
-        square.setFill("red")
+        square = Rectangle(Point(pt_x - 20, pt_y - 20), Point(pt_x + 20, pt_y + 20))
         square.draw(win)
     
     # (c) Final message and exit click
     message = Text(Point(250, 470), "Click again to quit")
-    message.setSize(15)
     message.draw(win)
     win.getMouse()
     win.close()
