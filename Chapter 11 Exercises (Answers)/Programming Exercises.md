@@ -828,17 +828,14 @@ for i in range(len(sidewalk)):
 ```python
 class Set:
 
-    def __init__(self, elements):
+    def __init__(self,elements):
         #Sets never contain duplicates. Elements is a list where there are duplicates
         self.elements = []
         for item in elements:
             if item not in self.elements:
                 self.elements.append(item)
 
-    def __str__(self):
-        return "{" + ", ".join(str(i) for i in self.elements) + "}"
-
-    def addElement(self,x):
+    def addElement(self, x):
         if x not in self.elements:
             self.elements.append(x)
 
@@ -850,7 +847,11 @@ class Set:
         return x in self.elements
 
     def intersection(self, set2):
-       return Set([i for i in set2.elements if i in self.elements])
+        new_set = []
+        for i in set2.elements:
+            if i in self.elements:
+                new_set.append(i)
+        return Set(new_set)
 
     def union(self, set2):
         new_set = []
@@ -863,7 +864,11 @@ class Set:
         return Set(new_set)
 
     def subtract(self, set2):
-        return Set([i for i in self.elements if i not in set2.elements])
+        new_set = []
+        for i in self.elements:
+            if i not in set2.elements:
+                new_set.append(i)
+        return Set(new_set)
 ``` 
 
 ---
