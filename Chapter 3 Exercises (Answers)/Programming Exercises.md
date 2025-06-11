@@ -228,7 +228,7 @@ print("The Fibonacci number is:", current)
 ```python
 import math
 
-x = eval(input("Enter the value to find the square root of: "))
+x = float(input("Enter the value to find the square root of: "))
 iterations = int(input("Enter the number of iterations: "))
 
 guess = x / 2  # Initial guess
