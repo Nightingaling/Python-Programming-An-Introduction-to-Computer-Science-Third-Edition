@@ -21,7 +21,6 @@ class Dice:
         counts = [0] * 7
         for value in self.dice:
             counts[value] = counts[value] + 1
-
         # score the hand
         if 5 in counts:
             return "Five of a Kind", 30
@@ -38,11 +37,13 @@ class Dice:
         else:
             return "Garbage", 0
 
+
 class PokerApp:
+
     def __init__(self, interface):
         self.dice = Dice()
         self.money = 100
-        
+
         # c)
         self.score = 0
         self.scores = []
@@ -64,7 +65,7 @@ class PokerApp:
             self.appendHighScore(self.interface.EntryWindow())
 
         self.interface.close()
-        
+
     def playRound(self):
         self.money = self.money - 10
         self.interface.setMoney(self.money)
@@ -108,4 +109,3 @@ class PokerApp:
             print("{0},{1},{2}".format(rank[i], self.scores[i], self.names[i]),
                   file=outfile, end="\t")
         outfile.close()
-        
