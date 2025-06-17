@@ -35,7 +35,6 @@ class SplashScreen:
             self.msg.setStyle("bold")
             self.msg.draw(self.win)
             x = x + 200
-
         y, j = 240, 0
         infile = open('highscore.txt', 'r')
         color = ["grey", "red", "orange", "pink", "yellow4", "yellow", "lightgreen", "lightblue", "blue", "green"]
@@ -62,7 +61,6 @@ class SplashScreen:
             y = y + 35
             j = j + 1
         infile.close()
-        
 
     def enter(self):
         p = self.win.getMouse()
