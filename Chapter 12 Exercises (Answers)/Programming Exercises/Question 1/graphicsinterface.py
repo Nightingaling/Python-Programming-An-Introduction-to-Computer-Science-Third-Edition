@@ -6,7 +6,7 @@ from button import Button
 from helpwindow import HelpWindow
 
 class GraphicsInterface:
-        
+
     def __init__(self):
         self.win = GraphWin("Dice Poker", 600, 400)
         self.win.setBackground("green3")
@@ -27,11 +27,11 @@ class GraphicsInterface:
         self.buttons.append(b)
         b = Button(self.win, Point(570,375), 40, 30, "Quit")
         self.buttons.append(b)
-        
+
         # b)
         b = Button(self.win, Point(30,375), 40, 30, "Help")
         self.buttons.append(b)
-        
+
         self.money = Text(Point(300,325), "$100")
         self.money.setSize(18)
         self.money.draw(self.win)
@@ -75,7 +75,7 @@ class GraphicsInterface:
             else:
                 self.msg.setText("")
                 return ans == "Roll Dice"
-                
+
     def chooseDice(self):
         # choices is a list of indexes of the selected dice
         choices =[]                     # No dice chosen yet
@@ -83,7 +83,6 @@ class GraphicsInterface:
             # wait for user to click a valid button
             b = self.choose(["Die 1", "Die 2", "Die 3", "Die 4", "Die 5",
                              "Roll Dice", "Score"])
-
             if b[0] == "D":             # User clicked a die button
                 i = int(b[4]) - 1       # Translate label to die index   
                 if i in choices:        # Currently selected, unselect it
@@ -102,14 +101,12 @@ class GraphicsInterface:
 
     def choose(self,choices):
         buttons = self.buttons
-
         # activate choice buttons, deactivate others
         for b in buttons:
             if b.getLabel() in choices:
                 b.activate()
             else:
                 b.deactivate()
-
         # get mouse clicks until an active button is clicked
         while True:
             p = self.win.getMouse()
