@@ -1,5 +1,0 @@
-John,Google,Connecticut,john@gmail.com
-Kenny,Google,Colorado,kenny@gmail.com
-Trump,Google,Georgia,donaldtrump@gmail.com
-Biden,Amazon,Iowa,biden@gmail.com
-Alvin,Prime,Montana,alvin@gmail.com
