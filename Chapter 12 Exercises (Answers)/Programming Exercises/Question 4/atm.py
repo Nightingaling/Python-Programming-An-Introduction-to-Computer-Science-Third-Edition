@@ -1,16 +1,3 @@
-'''
-What information the account has:
-1. user ID
-2. PIN
-3. Balance in checking account
-4. Balance in saving account
-
-What can it do:
-1. Check balance # Once user entered successfully UI will display balances
-2. Withdraw cash # Need to update the UI once withdraw
-3. Transfer money between accounts # Need to update UI once transfered
-'''
-
 class ATM:
 
     def __init__(self):
@@ -58,7 +45,7 @@ class ATM:
                 self.interface.Enquiry(self.checking, self.savings)
             choice, self.amt = self.interface.servicesPressed()
         self.update()
-        
+
     def withdraw(self):
         if self.amt < 10:
             self.interface.lessthan10Amount()
