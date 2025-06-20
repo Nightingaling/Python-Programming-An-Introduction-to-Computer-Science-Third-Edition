@@ -95,7 +95,7 @@ class MainScreenInterface:
             amt = 0
         win.close()
         return choice, float(amt)
-        
+
     def Enquiry(self, checking, savings):
         win = GraphWin('Accounts', 500, 250)
         self.logo = Text(Point(30,10), "OCBC")
@@ -121,7 +121,7 @@ class MainScreenInterface:
         while not cont.clicked(p):
             p = win.getMouse()
         win.close()
-        
+
     def otherAmt(self):
         win = GraphWin('Other Cash Amount', 400, 100)
         amtEntry = Entry(Point(200,30), 15).draw(win)
@@ -166,7 +166,7 @@ class MainScreenInterface:
         while not confirm.clicked(p):
             p = win.getMouse()
         win.close()
-        
+
     def quit(self):
         self.win.close()
         return 'quit', None
