@@ -663,7 +663,6 @@ def main():
         n = n + 1
         for i in range(k):
             hand.append(deck.dealCard())
-        print(hand)
         total = 0
         hasAce = False
         for i in hand:
