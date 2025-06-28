@@ -1,4 +1,4 @@
-# **Question 1**
+# **Question 5**
 **Code**:
 ```python
 from random import randrange
