@@ -20,7 +20,7 @@ End Date: IN PROGRESS
 - [X] Loop Structures and Booleans
 - [X] Simulation and Design
 - [X] Defining Classes
-- [ ] Data Collections
+- [X] Data Collections
 - [ ] Object-Oriented Design
 - [ ] Algorithm Design and Recursion
 
