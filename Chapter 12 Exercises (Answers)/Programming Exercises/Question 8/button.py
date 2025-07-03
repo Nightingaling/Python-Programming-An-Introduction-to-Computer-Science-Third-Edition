@@ -9,9 +9,7 @@ class Button:
     returns True if the button is active and p is inside it."""
 
     def __init__(self, win, center, width, height, label):
-        """Creates a rectagular button, eg:
-        qb = Button(myWin, centerPoint, width, height, 'Quit')"""
-
+        """Creates a rectagular button, eg: qb = Button(myWin, centerPoint, width, height, 'Quit')"""
         w,h = width/2.0, height/2.0
         x,y = center.getX(), center.getY()
         self.xmax, self.xmin = x+w, x-w
