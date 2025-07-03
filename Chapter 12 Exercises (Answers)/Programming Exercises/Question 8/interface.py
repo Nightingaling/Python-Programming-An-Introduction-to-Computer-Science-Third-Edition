@@ -27,7 +27,7 @@ class Interface:
             i.activate()
             x = x + 60
             n = n + 1
-        # draw player Turn
+        # draw player Turn message
         self.msg = Text(Point(250,30), 'Player 1 Turn')
         self.msg.setStyle('bold')
         self.msg.setSize(24)
@@ -35,7 +35,6 @@ class Interface:
         self.msg.draw(self.win)
 
     def drawToken(self, centerPoint, color):
-        x = centerPoint[0]
         token = Circle(Point(centerPoint[0], 115), 20)
         token.setFill(color)
         token.draw(self.win)
@@ -63,5 +62,3 @@ class Interface:
             self.msg.setFill('green')
         self.win.getMouse()
         self.win.close()
-        
-        
