@@ -3,6 +3,7 @@ class Connect4App:
     def __init__(self):
         self.centerPoint = ([65,490], [125,490], [185,490], [245,490], [305,490], [365,490], [425,490])
         self.count = [0,0,0,0,0,0,0]
+        self.row = [5,5,5,5,5,5,5]
         self.player1, self.player2 = True, False
         self.total = 0
         self.board =[
@@ -13,8 +14,7 @@ class Connect4App:
         [' ',' ',' ',' ',' ',' ',' '],
         [' ',' ',' ',' ',' ',' ',' ']
         ]
-        self.row = [5,5,5,5,5,5,5]
-        
+
     def run(self, interface):
         self.interface = interface
         while True:
