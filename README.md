@@ -21,7 +21,7 @@ End Date: IN PROGRESS
 - [X] Simulation and Design
 - [X] Defining Classes
 - [X] Data Collections
-- [ ] Object-Oriented Design
+- [X] Object-Oriented Design
 - [ ] Algorithm Design and Recursion
 
 Legend:
