@@ -7,7 +7,7 @@ The purpose of this project is to learn Python as well as the fundamentals of co
 # Timeline
 Start Date: June 1, 2024
 
-End Date: IN PROGRESS
+End Date: December 18, 2025
 
 # Table of Content & Exercises
 - [X] Computers and Programs
@@ -22,10 +22,10 @@ End Date: IN PROGRESS
 - [X] Defining Classes
 - [X] Data Collections
 - [X] Object-Oriented Design
-- [ ] Algorithm Design and Recursion
+- [X] Algorithm Design and Recursion
 
 Legend:
-- [ ] = In progress
+- [] = In progress
 - [X] = Done 
 
 # Supplementary Links
