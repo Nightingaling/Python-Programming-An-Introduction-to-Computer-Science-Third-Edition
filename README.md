@@ -25,7 +25,7 @@ End Date: December 18, 2025
 - [X] Algorithm Design and Recursion
 
 Legend:
-- [] = In progress
+- [ ] = In progress
 - [X] = Done 
 
 # Supplementary Links
