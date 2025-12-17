@@ -761,6 +761,55 @@ for i in range(n):
 # **Question 15**
 **Code**:
 ```python
-<code>
+from random import random
+
+def simulate_vision_fraction(num_samples):
+    hits = 0
+    # Observer is at x=0.5, Wall is at x=1.0. 
+    # Distance to wall is 0.5.
+    dist_to_wall = 0.5
+
+    for _ in range(num_samples):
+        # --- 1. Rejection Sampling (Get a random 3D direction) ---
+        while True:
+            # random() returns [0.0, 1.0)
+            # We convert this to [-1.0, 1.0) for x, y, and z
+            vx = (2 * random()) - 1
+            vy = (2 * random()) - 1
+            vz = (2 * random()) - 1
+            
+            # Check if this point lies inside the unit sphere
+            # (This ensures the direction is uniformly random)
+            if 0 < (vx*vx + vy*vy + vz*vz) <= 1:
+                break
+        
+        # --- 2. Check Intersection ---
+        
+        # Filter A: Is the ray moving towards the wall (positive x)?
+        if vx <= 0:
+            continue
+            
+        # Filter B: Where does the ray hit the plane x=1?
+        # The ray equation is: Position = Origin + t * Vector
+        # We need: 0.5 + t * vx = 1.0
+        t = dist_to_wall / vx
+        
+        # Calculate the Y and Z coordinates at that impact point
+        hit_y = 0 + t * vy
+        hit_z = 0 + t * vz
+        
+        # Filter C: Does it hit within the square wall boundaries?
+        # The wall goes from -1 to 1 in both Y and Z
+        if -1 <= hit_y <= 1 and -1 <= hit_z <= 1:
+            hits += 1
+
+    return hits / num_samples
+
+# --- Run the Simulation ---
+n = 1000000
+result = simulate_vision_fraction(n)
+
+print("Simulation with {0} rays.".format(n))
+print("Fraction: {0:.5f}".format(result))
+print("Percentage: {0:.2f}%".format(result * 100))
 ```
-> Unable to solve this question. Requires the use of a complex algorithm and geometry.
