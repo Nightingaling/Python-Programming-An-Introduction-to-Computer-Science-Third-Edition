@@ -7,7 +7,7 @@ The purpose of this project is to learn Python as well as the fundamentals of co
 # Timeline
 Start Date: June 1, 2024
 
-End Date: December 18, 2025
+End Date: December 31, 2025
 
 # Table of Content & Exercises
 - [X] Computers and Programs
