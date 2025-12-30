@@ -17,26 +17,19 @@
 ---
 
 # **Question 2**  
-a) **`Point(130, 130)`**  
-- A single point at coordinates (130, 130). Appears as a small dot (default color: black).  
+a) A single point at coordinates (130, 130). Appears as a small dot (default color: black).  
 
-b) **`c = Circle(Point(30,40), 25)`**  
-- A blue-filled circle with a red border, centered at (30, 40) with a radius of 25.  
+b) A blue-filled circle with a red border, centered at (30, 40) with a radius of 25.  
 
-c) **`r = Rectangle(Point(20,20), Point(40,40))`**  
-- A light-green square (RGB: 0,255,150) with corners at (20,20) and (40,40). Border width is 3 (default color: black).  
+c) A light-green square (RGB: 0,255,150) with corners at (20,20) and (40,40). Border width is 3 (default color: black).  
 
-d) **`l = Line(Point(100,100), Point(100,200))`**  
-- A vertical dark-red line from (100,100) to (100,200) with an arrowhead at the starting point.  
+d) A vertical dark-red line from (100,100) to (100,200) with an arrowhead at the starting point.  
 
-e) **`Oval(Point(50,50), Point(60,100))`**  
-- A tall, narrow oval fitting inside a rectangle from (50,50) to (60,100). Default fill and outline.  
+e) A tall, narrow oval fitting inside a rectangle from (50,50) to (60,100). Default fill and outline.  
 
-f) **`shape = Polygon(Point(5,5), Point(10,10), Point(5,10), Point(10,5))`**  
-- An orange-filled polygon connecting four points, forming a diamond or overlapping squares.  
+f) An orange-filled polygon connecting four points, forming a diamond or overlapping squares.  
 
-g) **`t = Text(Point(100,100), "Hello World!")`**  
-- Italicized "Hello World!" in 16pt Courier font, centered at (100,100). Default color: black.  
+g) Italicized "Hello World!" in 16pt Courier font, centered at (100,100). Default color: black.  
 
 ---
 
