@@ -7,7 +7,7 @@ Given `s1 = "spam"` and `s2 = "ni!"`:
 **e)** `s1[2] + s2[:2]` → `"ani"`  
 **f)** `s1 + s2[-1]` → `"spam!"`  
 **g)** `s1.upper()` → `"SPAM"`  
-**h)** `s2.upper().ljust(4) * 3` → `"Ni! Ni! Ni! "`  
+**h)** `s2.upper().ljust(4) * 3` → `"NI! NI! NI! "`  
 
 ---
 
@@ -92,7 +92,7 @@ Due to invalid placeholder syntax in format string, the 7.5f is interpreted as a
 "Time left {0:02}:{1:05.2f}".format(1, 37.374)  
 ```  
 **Result:**  
-`"Time left 01:037.37"`  
+`"Time left 01:37.37"`  
 
 #### **g)**  
 ```python  
