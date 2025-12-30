@@ -9,5 +9,6 @@
 9.True
 10.True
 
-Note: For question 7, the answer (True) was due to the assumption that all n letters in word are unique.
+Note: For question 7, the answer (True) was due to the assumption that all n letters in word are unique
+      or if n letters in word are not unique then we assume that all duplicate anagrams are accepted.
       If all duplicate anagrams are not accepted then the answer is False.
