@@ -3,15 +3,15 @@
 - **Definite loop:** Executes a predetermined number of times (e.g., `for` loop with `range`).  
 - **Indefinite loop:** Runs until a condition is met, potentially infinitely (e.g., `while` loop).  
 
-**1b) For Loop vs. While Loop**  
+**b) For Loop vs. While Loop**  
 - **For loop:** Typically definite, iterating over a sequence (e.g., `for i in range(10)`).  
 - **While loop:** Indefinite, runs while a condition is true (e.g., `while x < 10`).  
 
-**1c) Interactive Loop vs. Sentinel Loop**  
+**c) Interactive Loop vs. Sentinel Loop**  
 - **Interactive loop:** Prompts the user each iteration (e.g., "Continue? (y/n)").  
 - **Sentinel loop:** Stops when a specific value is entered (e.g., "Enter 999 to quit").  
 
-**1d) Sentinel Loop vs. End-of-File Loop**  
+**d) Sentinel Loop vs. End-of-File Loop**  
 - **Sentinel loop:** Terminates when a predefined value is met.  
 - **End-of-file (EOF) loop:** Terminates when the end of a *file* is reached.  
 
