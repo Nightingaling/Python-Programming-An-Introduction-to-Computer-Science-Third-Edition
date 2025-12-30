@@ -21,7 +21,7 @@
 
 **e) Interpreter vs. Compiler**  
 - **Interpreter**: Translates/executes line-by-line (e.g., Python).  
-- **Compiler**: Translates entire code upfront (e.g., C++).  
+- **Compiler**: Translates whole program before execution, faster at runtime (e.g., C++).  
 - **Contrast**: Interpreters are slower but flexible; compilers are faster but require pre-processing.  
 
 **f) Syntax vs. Semantics**  
