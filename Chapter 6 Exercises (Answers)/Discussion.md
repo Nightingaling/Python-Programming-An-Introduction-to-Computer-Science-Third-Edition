@@ -46,5 +46,5 @@ result = cube(y)
 print(result)  
 ```  
 
-**(c) Why the output is `4 27`, not `27 27`:**   
-Modifying the local `answer` in `cube` does not affect the actual `answer`. Python uses **pass-by-object-reference**, but integers are immutable, so changes to the local variable are isolated.  
+**(c) Why the output is `4 27`, not `27 27`:**  
+Modifying the local variable `answer` inside the `cube` function does not affect the variable `answer` in the main program. When the function is called, Python passes the value of `x` into the function by object reference. However, since integers are immutable, the assignment `answer = x * x * x` inside the function simply creates or updates a new local variable named answer that exists only within the function’s scope. Therefore, the global `answer` in the main program remains `4`, and the function computes `27` and returns it, thus the output is `4 27`.
