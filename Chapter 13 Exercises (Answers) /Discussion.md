@@ -18,7 +18,7 @@ $2^n$
 `['foo', 'ofo', 'oof', 'foo', 'ofo', 'oof']`
 
 **Explanation:**
-Standard anagram algorithms that generate permutations by position will produce duplicates if the input letters aren't unique.
+Standard anagram algorithms that generate permutations by position will produce duplicates if the input letters aren't unique. The algorithm generates six permutations but only three unique anagrams.
 
 ---
 
