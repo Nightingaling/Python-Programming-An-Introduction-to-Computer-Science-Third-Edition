@@ -40,7 +40,7 @@ def main():
     if len(data) == 0:
         print('No numbers entered. Exiting')
         return #exit from main()
-    stats = input('Stats to compute (mean, stdDev, or both): '.lower())
+    stats = input('Stats to compute (mean, stdDev, or both): ').lower()
     if stats == 'mean':
         print('The mean is {0:0.2f}'.format(mean(data)))
     elif stats == 'stddev':
@@ -339,8 +339,7 @@ if __name__ == '__main__':
 
 gpa.py
 ```python
-
-#   Program to find student with highest GPA
+# Program to find student with highest GPA
 
 class Student:
     def __init__(self, name, hours, qpoints):
@@ -669,7 +668,7 @@ def main():
             if i[0] == "Ace" and (not hasAce):
                 total = total + 11
                 hasAce = True
-            elif str(i[0]) in 'Jack Queen King':
+            elif i[0] in ['Jack', 'Queen', 'King']:
                 total = total + 10
             elif i[0] == 'Ace' and hasAce:
                 total = total + 1
@@ -687,7 +686,7 @@ def main():
                 draw = deck.dealCard()
                 if draw[0] == "Ace" and hasAce:
                     total = total + 1
-                elif str(draw[0]) in 'Jack Queen King':
+                elif draw[0] in ['Jack', 'Queen', 'King']:
                     total = total + 10
                 elif draw[0] == "Ace":
                     total = total + 11
@@ -725,7 +724,7 @@ class StatSet:
         return total / len(self.nums)
 
     def median(self):
-        copy = self.nums
+        copy = self.nums[:]
         copy.sort()
         size = len(copy)
         midPos = size // 2
