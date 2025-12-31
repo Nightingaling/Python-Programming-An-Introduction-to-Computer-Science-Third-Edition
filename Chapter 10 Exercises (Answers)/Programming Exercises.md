@@ -906,12 +906,14 @@ class Face:
         while True:
             if win.checkMouse(): break
             current = self.head.getCenter()
+            bounce = False
             if current.getY() - size <= 0 or current.getY() + size >= 300:
                 dy = -dy
-                expressions[expr_index](win)
-                expr_index = (expr_index + 1) % 3
+                bounce = True
             if current.getX() - size <= 0 or current.getX() + size >= 300:
                 dx = -dx
+                bounce = True
+            if bounce:
                 expressions[expr_index](win)
                 expr_index = (expr_index + 1) % 3
             self.head.move(dx,dy)
@@ -933,7 +935,6 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-> The order of change of facial expression is smile, wink then lastly frown. However, if you change the position of the center of the face, where it causes the face to have corner bounces (hitting two walls simultaneously). Then, the order will not be the same, as local variable "expr_index" will + 2 instead of +1. Thus, the order will skip the next one and will execute the subsequent facial expression. e.g. neutral, wink, smile, frown, wink...
 
 ---
 
