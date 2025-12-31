@@ -330,7 +330,6 @@ if __name__ == '__main__':
 ```python
 def recBinSearch(word, dictionary, low, high):
     if low > high:
-        print("'{0}' is flagged as potentially incorrect".format(word))
         return None
 
     mid = (low + high) // 2
@@ -357,7 +356,6 @@ def main():
 
         # Store all the words in the dictionary into list called 'wordlist'
         wordlist = [word.rstrip().lower() for word in dictionary]
-        wordlist.sort()
 
         # Store content of document as a single multiline string
         documentcontent = document.read()
@@ -379,7 +377,9 @@ def main():
         # Binary search for every word in the document
         print('Checking document...')
         for word in documentlist:
-            search(word.lower(), wordlist) #.lower() to match dictionary format
+            result = search(word.lower(), wordlist) #.lower() to match dictionary format
+            if result == None:
+                print("'{0}' is flagged as potentially incorrect".format(word))
         print('Document scan completed')
         dictionary.close()
         document.close()
