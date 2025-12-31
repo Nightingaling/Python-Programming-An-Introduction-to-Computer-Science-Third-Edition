@@ -334,6 +334,12 @@ def main():
     for score_value in range(11):
         # Calculate the height based on the count of the current score
         count = file_contents.count(str(score_value))
+
+        # Retify count for '1' since '10' contains '1'
+        if score_value == 1:
+            count = count - file_contents.count('10')
+
+        # Setting rectangle bar height
         bar_height = count * 10
         
         # Draw the rectangle bar
