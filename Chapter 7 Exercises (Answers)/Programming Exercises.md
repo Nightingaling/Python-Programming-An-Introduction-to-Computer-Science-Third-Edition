@@ -99,44 +99,32 @@ else:
 # **Question 7**
 **Code**:
 ```python
-def time_counter(hours):
-    if int(end[1]) > int(start[1]):
-        mins = int(end[1]) - int(start[1])
+def convert(start, end):
+    return 60 - int(start[2:]) + int(end[2:]) + (int(end[:2]) - int(start[:2]) - 1) * 60
 
-    elif int(end[1]) < int(start[1]):
-        mins = 60 + int(end[1]) - int(start[1])
-        hours = hours - 1
-
+def main():
+    start = input('Starting time (in 24hr format, e.g. 0900): ')
+    end = input('Ending time (in 24hr format, e.g. 2100): ')
+    if start > end:
+        print('Invalid 24-hour time format. Not possible for start time to be later than end time.')
+    elif len(start) != 4 or len(end) != 4:
+        print('Invalid 24-hour time format. Please input HHMM format')
+    elif int(start[2:]) > 59 or int(end[2:]) > 59:
+        print('Invalid 24-hour time format. Not possible to have minute hand > 59.')
+    elif not (0 <= int(start[:2]) <= 23 and 0 <= int(end[:2]) <= 23):
+        print('Invalid 24-hour time format. Not possible to have hour hand > 23.')
     else:
-        mins = 0
+        if end > '2100':
+            if start > '2100':
+                bill = (1.75 / 60) * convert(start, end)
+            else:
+                bill = (2.5 / 60) * convert(start, '2100')
+                bill = bill + (1.75 / 60) * convert('2100', end)
+        else:
+            bill = (2.5 / 60) * convert(start, end)
+        print('Bill: ${0:0.2f}'.format(bill))
 
-    return hours, mins
-
-start = input('What is the starting time (in 24hr format, e.g. 13:00): ').split(':')
-end = input('What is the ending time (in 24hr format, e.g. 21:59): ').split(':')
-hours = int(end[0]) - int(start[0])
-
-if int(start[0]) >= 21:
-    hours, mins = time_counter(hours)
-    bill = (hours * 1.75) + (1.75 / 60 * mins)
-    print('Bill: ${0:0.2f}'.format(bill))
-    
-elif int(end[0]) >= 21:
-    hours = 21 - int(start[0])
-    OT_hours = int(end[0]) - 21
-    OT_mins = int(end[1])
-    if int(start[1]) > 0:
-        mins = 60 - int(start[1])
-        hours = hours - 1
-    else:
-        mins = 0
-    bill = ((hours * 2.5) + (2.5 / 60 * mins)) + ((OT_hours * 1.75) + (1.75 / 60 * OT_mins))
-    print('Bill: ${0:0.2f}'.format(bill))
-
-else:
-    hours, mins = time_counter(hours)
-    bill = (hours * 2.5) + (2.5 / 60 * mins)
-    print('Bill: ${0:0.2f}'.format(bill))
+main()
 ```
 
 ---
@@ -394,7 +382,7 @@ else:
     point2.setFill("red")
     point2.draw(win)
 
-    # Keep window open until click
+    # Wait for click before close window
     win.getMouse()
     win.close()
 ```
@@ -436,7 +424,7 @@ else:
 length = sqrt(dx ** 2 + dy ** 2)
 print('The length of the line is: ', round(length,2))
 
-#Wait for click before close window
+# Wait for click before close window
 win.getMouse()
 win.close()
 ```
@@ -484,7 +472,8 @@ def main():
         score = score + point
         print(point, 'points scored!')
         print('Total score:', score)
-        
+
+    # Wait for click before close window
     win.getMouse()
     win.close()
     
@@ -511,8 +500,10 @@ for i in range(10000):
     if circle.getCenter().getX() + 20 == 300:
         dx = -1
     circle.move(dx,dy)
-    update(30) #pause so rate is not more than 30 times a second
-    
+    update(30)
+
+# Wait for click before close window
+win.getMouse()
 win.close()
 ```
 
