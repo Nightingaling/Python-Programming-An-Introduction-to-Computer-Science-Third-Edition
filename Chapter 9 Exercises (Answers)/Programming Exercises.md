@@ -754,6 +754,10 @@ for i in range(n):
     x = x + cos(angle)
     y = y + sin(angle)
     Line(Point(current_step.getX(), current_step.getY()), Point(x, y)).draw(win)
+
+# Wait for user click before closing
+win.getMouse()
+win.close()
 ```
 
 ---
