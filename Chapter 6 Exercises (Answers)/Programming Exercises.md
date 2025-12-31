@@ -157,11 +157,10 @@ def main():
     total_area = area(distance(p1,p2), distance(p2,p3), distance(p3,p1))
     message.setText("The perimeter is: {0:0.2f}".format(perim))
     Text(Point(5, 1.5), "The area is: {0:0.2f}".format(total_area)).draw(win)
-    
 
     # Wait for another click to exit 
     win.getMouse() 
-    win. close()
+    win.close()
     
 main()
 ```
@@ -286,13 +285,13 @@ def squareEach(nums):
     for i in range(len(nums)):
         nums[i] = nums[i] ** 2
 
-#Open and read file
+# Open and read file
 num_file = input('File: ')
 numbers = open(num_file, 'r')
 strList = numbers.readlines()
 numbers.close()
 
-#Compute sum of squares of numbers
+# Compute sum of squares of numbers
 nums = toNumbers(strList)
 squareEach(nums)
 print('The sum of the squares of the values is:', sumList(nums))
@@ -306,20 +305,18 @@ print('The sum of the squares of the values is:', sumList(nums))
 from graphics import *
 
 def drawFace(center, size, win):
+    coordX = center.getX() - size / 2
+    coordY = center.getY() - size / 2
 
-    #Head
+    # Head
     head = Circle(center, size)
     head.setFill('yellow')
     head.draw(win)
-
-    coordX = center.getX() - size / 2
-    coordY = center.getY() - size / 2
 
     # Eyes
     left_eye = Circle(Point(coordX, coordY), size * 0.15)
     left_eye.setFill("black")
     left_eye.draw(win)
-
     right_eye = Circle(Point(coordX + size, coordY), size * 0.15)
     right_eye.setFill("black")
     right_eye.draw(win)
@@ -339,14 +336,14 @@ def drawFace(center, size, win):
                    Point(center.getX() + size * 0.1, center.getY() + size * 0.25))
     nose.setFill("orange")
     nose.draw(win) 
-        
 
-#Example usage:
 win = GraphWin('Smiley Face', 500, 500)
 win.setBackground('lightgray')
 drawFace(Point(100, 100), 30, win)
 drawFace(Point(300, 200), 50, win)
-win.getMouse()
+
+# Wait for another click to exit 
+win.getMouse() 
 win.close()
 ```
 
@@ -359,20 +356,18 @@ from graphics import *
 from math import *
 
 def drawFace(center, size, win):
+    coordX = center.getX() - size / 2
+    coordY = center.getY() - size / 2
 
-    #Head
+    # Head
     head = Circle(center, size)
     head.setFill('yellow')
     head.draw(win)
-
-    coordX = center.getX() - size / 2
-    coordY = center.getY() - size / 2
 
     # Eyes
     left_eye = Circle(Point(coordX, coordY), size * 0.15)
     left_eye.setFill("black")
     left_eye.draw(win)
-
     right_eye = Circle(Point(coordX + size, coordY), size * 0.15)
     right_eye.setFill("black")
     right_eye.draw(win)
@@ -405,6 +400,8 @@ for i in range(faces):
     dy = center_face.getY() - edge_face.getY()
     size = sqrt(dx**2 + dy**2)
     drawFace(center_face, size, win)
+
+# Wait for another click to exit 
 win.getMouse()
 win.close()
 ```
@@ -430,6 +427,9 @@ def main():
     for i in range(10):
         p = win.getMouse()
         moveTo(shape, p)
+
+    # Wait for another click to exit 
+    win.getMouse()
     win.close()
 main()
 ```
