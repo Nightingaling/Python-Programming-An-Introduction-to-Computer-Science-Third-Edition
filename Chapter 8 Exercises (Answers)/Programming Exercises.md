@@ -342,6 +342,7 @@ else:
     # Draw regression line spanning the entire window
     Line(Point(0, left_y), Point(300, right_y)).draw(win)
 
+    # Wait for click before closing
     win.getMouse()
 
 win.close()
@@ -426,15 +427,15 @@ def handleKey(k, win):
         win.setBackground('lightblue')
 
 def handleClick(pt, win):
-    # create an Entry for user to type in
+    # Create an Entry for user to type in
     entry = Entry(pt, 10)
     entry.draw(win)
 
-    # Go modal: loop until user types <Enter> key
+    # Loop until user types <Enter> key
     while True: 
         key = win.getKey() 
         if key == "Return":
-            # undraw the entry and create and draw Text0
+            # undraw the entry and create and draw Text
             entry.undraw()
             typed = entry.getText()
             Text(pt, typed).draw(win)
@@ -444,22 +445,19 @@ def handleClick(pt, win):
             entry.undraw()
             break
 
-    #clear (ignore) any mouse click that occured during text entry
+    # clear (ignore) any mouse click that occured during text entry
     win.checkMouse()
 
 def main():
     win = GraphWin('Click and Type', 500, 500)
 
     # Event Loop: handle key presses and mouse clicks until the user presses the 'q' key.
-
     while True:
         key = win.checkKey()
         if key == 'q':
             break
-
         if key:
             handleKey(key,win)
-
         pt = win.checkMouse()
         if pt:
             handleClick(pt, win)
