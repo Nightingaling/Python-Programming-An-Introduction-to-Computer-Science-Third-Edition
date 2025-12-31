@@ -131,7 +131,7 @@ degrees = float(input("Enter angle in degrees: "))
 
 radians = math.pi / 180 * degrees
 length = height / math.sin(radians)
-print("Ladder length:", length, 'radians')
+print("Ladder length:", length, 'meters')
 ```
 
 ---
