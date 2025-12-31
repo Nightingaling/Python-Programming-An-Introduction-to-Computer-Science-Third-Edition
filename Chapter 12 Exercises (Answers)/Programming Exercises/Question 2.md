@@ -112,11 +112,25 @@ def printIntro():
     print("has the first serve.\n")
 
 def getInputs():
-    # Returns the three simulation parameters
-    a = float(input("What is the prob. player A wins a serve? "))
-    b = float(input("What is the prob. player B wins a serve? "))
-    n = int(input("How many games to simulate? "))
-    return a, b, n
+    while True:
+        try:
+            # Returns the three simulation parameters
+            a = float(input("What is the prob. player A wins a serve? "))
+            b = float(input("What is the prob. player B wins a serve? "))
+            n = int(input("How many games to simulate? "))
+        except ValueError:
+            print('Invalid input. Enter numeric probabilities and an integer number of games.')
+            continue
+        if not (0.0 <= a <= 1.0 and 0.0 <= b <= 1.0):
+            print('Probabilities must be between 0 and 1. Please try again.')
+            continue
+        if n <= 0:
+            print('Number of games must be a positive integer. Please try again.')
+            continue
+        if a == 0.0 and b == 0.0 and n > 0:
+            print('Both probabilities are zero; games will never progress. Change probabilities.')
+            continue
+        return a, b, n
 
 def main():
     printIntro()
@@ -133,6 +147,7 @@ def main():
     # Print the results
     stats.printReport()
 
-main()
-input("\nPress <Enter> to quit")
+if __name__ == '__main__':
+    main()
+    input("\nPress <Enter> to quit")
 ```
